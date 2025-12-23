@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Baloo", cursive;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;
+  background: url("assets/bg.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6%;
+}
+
+.login-card {
+  width: 350px;
+  background: white;
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* Tabs */
+.role-switch {
+  display: flex;
+  background: #f0f0f0;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.role-switch button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.role-switch button.active {
+  background: #8e5cff;
+  color: white;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+/* Buttons */
+.google-btn,
+.login-btn,
+.guest-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.google-btn {
+  border: 2px solid #ddd;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.google-btn img {
+  width: 20px;
+}
+
+.login-btn {
+  background: #4facfe;
+  border: none;
+  color: white;
+}
+
+.guest-btn {
+  background: #57cc99;
+  border: none;
+  color: white;
+}
+
+/* Utility */
+.divider {
+  text-align: center;
+  margin: 12px 0;
+  color: #aaa;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .page {
+    justify-content: center;
+    padding-right: 0;
+  }
+}
