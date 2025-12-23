@@ -1,3 +1,4 @@
+/* General Reset & Typography */
 * {
   box-sizing: border-box;
   font-family: "Comic Sans MS", "Baloo", cursive;
@@ -11,12 +12,13 @@ body {
   text-align: center;
 }
 
-/* Floating bubbles */
+/* Floating bubbles (Hidden on very small screens to reduce clutter) */
 .bubble {
   position: absolute;
   border-radius: 50%;
   opacity: 0.3;
   animation: float 10s infinite alternate;
+  z-index: -1; /* Keep bubbles behind content */
 }
 
 .b1 { width: 120px; height: 120px; background: #fff; top: 10%; left: 5%; }
@@ -30,44 +32,52 @@ body {
 
 /* Header */
 .header {
-  padding: 50px 20px 20px;
+  padding: 60px 20px 20px;
   color: #fff;
 }
 
 .header h1 {
-  font-size: 42px;
+  font-size: clamp(28px, 8vw, 42px); /* Responsive font size */
   margin: 0;
 }
 
 .header p {
-  font-size: 18px;
+  font-size: clamp(16px, 4vw, 18px);
   margin-top: 10px;
 }
 
-/* Games */
+/* Games Container */
 .games {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  align-items: center;
+  gap: 30px;
   padding: 40px 20px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allows cards to wrap to the next line */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Game Card */
 .game-card {
-  width: 300px;
+  /* Using flex-basis for better control */
+  flex: 1 1 300px; 
+  max-width: 340px;
+  min-width: 280px;
+  
   background: #fff;
   border-radius: 30px;
   padding: 30px 25px 35px;
   text-decoration: none;
   color: #333;
-  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-card:hover {
-  transform: translateY(-12px) scale(1.05);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
 /* Card colors */
@@ -77,35 +87,34 @@ body {
 /* Badge */
 .badge {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: -10px;
+  right: 10px;
   background: #ff9f1c;
-  color: #000;
+  color: #fff;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: bold;
 }
 
-.badge.new {
-  background: #2ec4b6;
-}
+.badge.new { background: #2ec4b6; }
 
 /* Icon */
 .icon {
-  font-size: 70px;
+  font-size: 60px;
   margin-bottom: 10px;
 }
 
 /* Text */
 .game-card h2 {
-  font-size: 26px;
+  font-size: 24px;
   margin: 10px 0;
 }
 
 .game-card p {
   font-size: 16px;
   margin-bottom: 25px;
+  min-height: 40px; /* Keeps card heights consistent */
 }
 
 /* Button */
@@ -117,11 +126,34 @@ body {
   cursor: pointer;
   background: linear-gradient(135deg, #ffd166, #ff9f1c);
   font-weight: bold;
+  width: 100%; /* Full width on mobile looks better */
+  max-width: 200px;
 }
 
 /* Footer */
 .footer {
-  padding: 20px;
+  padding: 40px 20px;
   font-size: 15px;
   color: #fff;
+}
+
+/* --- MOBILE OPTIMIZATIONS --- */
+@media (max-width: 480px) {
+  .header {
+    padding: 40px 15px 10px;
+  }
+  
+  .bubble {
+    display: none; /* Hide bubbles on small phones for better performance */
+  }
+
+  .games {
+    gap: 20px;
+    padding: 20px 15px;
+  }
+
+  .game-card {
+    min-width: 100%; /* Cards take full width on tiny screens */
+    padding: 20px;
+  }
 }
