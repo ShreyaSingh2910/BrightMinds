@@ -21,7 +21,6 @@ body {
   position: relative;
 }
 
-/* Lottie subtle float */
 .lottie {
   width: 220px;
   animation: float 3s ease-in-out infinite;
@@ -33,7 +32,6 @@ body {
   100% { transform: translateY(0); }
 }
 
-/* Center game card */
 .center-box {
   background: rgba(255, 255, 255, 0.9);
   padding: 45px;
@@ -66,7 +64,6 @@ body {
   z-index: -1;
 }
 
-/* Entry animation */
 @keyframes popIn {
   0% { transform: scale(0.7); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
@@ -97,7 +94,6 @@ p {
   margin-bottom: 30px;
 }
 
-/* Fun game button */
 button {
   padding: 16px 45px;
   font-size: 24px;
@@ -110,7 +106,6 @@ button {
   transition: all 0.3s ease;
 }
 
-/* Hover & click effects */
 button:hover {
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 12px 25px rgba(0,0,0,0.35);
@@ -120,3 +115,4 @@ button:active {
   transform: scale(0.95);
 
 }
+
