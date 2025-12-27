@@ -29,7 +29,6 @@ body {
   margin-bottom: 18px;
 }
 
-/* Tabs */
 .role-switch {
   display: flex;
   background: #f0f0f0;
@@ -51,7 +50,6 @@ body {
   color: white;
 }
 
-/* Inputs */
 input {
   width: 100%;
   padding: 10px;
@@ -60,7 +58,6 @@ input {
   border: 1px solid #ccc;
 }
 
-/* Buttons */
 .google-btn,
 .login-btn,
 .guest-btn {
@@ -96,7 +93,6 @@ input {
   color: white;
 }
 
-/* Utility */
 .divider {
   text-align: center;
   margin: 12px 0;
@@ -107,11 +103,11 @@ input {
   display: none;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .page {
     justify-content: center;
     padding-right: 0;
   }
 }
+
 
