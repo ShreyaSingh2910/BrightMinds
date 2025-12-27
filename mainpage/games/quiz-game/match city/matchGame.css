@@ -244,14 +244,12 @@ h1 {
   }
 }
 
-/* ================= STRONG CARD HIGH FIVE ================= */
 
 .item {
   position: relative;
   transition: transform 0.3s ease;
 }
 
-/* MOVE TO CENTER (BIG MOVE) */
 .highfive-left {
   animation: moveRightBig 0.6s ease forwards;
   z-index: 10;
@@ -262,17 +260,14 @@ h1 {
   z-index: 10;
 }
 
-/* GLOW HOLD (HIGH FIVE MOMENT) */
 .highfive-hold {
   box-shadow: 0 0 25px 8px gold;
 }
 
-/* BIG BOUNCE */
 .highfive-bounce {
   animation: bigBounce 0.4s ease;
 }
 
-/* SPARKLES */
 .item.correct::after {
   content: "✨✨";
   position: absolute;
@@ -283,7 +278,6 @@ h1 {
 }
 
 
-/* ================= KEYFRAMES ================= */
 
 @keyframes moveRightBig {
   0% { transform: translateX(0); }
@@ -314,9 +308,6 @@ h1 {
 }
 
 
-
-/* ================= START MESSAGE ================= */
-
 .start-message {
   margin-top: 30px;
   font-size: 1.1rem;
@@ -335,7 +326,7 @@ h1 {
   100% { transform: scale(1); }
 }
 
-/* Hide game area initially */
 .game-area {
   display: none;
 }
+
