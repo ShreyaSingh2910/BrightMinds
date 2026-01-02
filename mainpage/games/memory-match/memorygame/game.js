@@ -1,49 +1,88 @@
-
-const cardsData = [
-  { pair: 1, img: "A.jpg" },
-  { pair: 1, img: "apple.jpg" },
-
-  { pair: 2, img: "D.avif" },
-  { pair: 2, img: "dolphine.png" },
-
-  { pair: 3, img: "H.webp" },
-  { pair: 3, img: "home.avif" },
-
-  { pair: 4, img: "K.webp" },
-  { pair: 4, img: "kite.avif" },
-
-  { pair: 5, img: "P.webp" },
-  { pair: 5, img: "pizza.avif" },
-
-  { pair: 6, img: "R.webp" },
-  { pair: 6, img: "Rabbit.jpg" },
-
-  { pair: 7, img: "U.png" },
-  { pair: 7, img: "unicorn.avif" },
-
-  { pair: 8, img: "Z.png" },
-  { pair: 8, img: "zebra.avif" }
+// =======================
+// ALL 26 LETTER ↔ IMAGE PAIRS
+// =======================
+const allLetters = [
+  { img: "A.jpg", match: "apple.jpg" },
+  { img: "B.jpg", match: "Baloon.jpg" },
+  { img: "C.jpg", match: "cake.png" },
+  { img: "D.jpg", match: "dolphine.png" },
+  { img: "E.jpg", match: "elephant.jpg" },
+  { img: "F.jpg", match: "fox.avif" },
+  { img: "G.jpg", match: "giraffe.webp" },
+  { img: "H.jpg", match: "home.avif" },
+  { img: "I.jpg", match: "icecream.avif" },
+  { img: "J.jpg", match: "jelly_fish.avif" },
+  { img: "K.jpg", match: "kite.avif" },
+  { img: "L.jpg", match: "lemon.avif" },
+  { img: "M.jpg", match: "monkey.avif" },
+  { img: "N.jpg", match: "nest.png" },
+  { img: "O.jpg", match: "owl.jpg" },
+  { img: "P.jpg", match: "pizza.avif" },
+  { img: "Q.jpg", match: "queen.avif" },
+  { img: "R.jpg", match: "Rabbit.jpg" },
+  { img: "S.jpg", match: "strawberry.png" },
+  { img: "T.jpg", match: "turtle.avif" },
+  { img: "U.jpg", match: "unicorn.avif" },
+  { img: "V.jpg", match: "vase.avif" },
+  { img: "W.jpg", match: "window.avif" },
+  { img: "X.jpg", match: "xmas.png" },
+  { img: "Y.jpg", match: "yacht.jpg" },
+  { img: "Z.jpg", match: "zebra.avif" }
 ];
 
-window.addEventListener('load', () => {
+// =======================
+// PICK RANDOM 8 LETTERS
+// =======================
+function getRandomCards() {
+  const shuffled = [...allLetters].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 8);
+
+  let cards = [];
+  let pairId = 1;
+
+  selected.forEach(item => {
+    cards.push({ pair: pairId, img: item.img });
+    cards.push({ pair: pairId, img: item.match });
+    pairId++;
+  });
+
+  return cards;
+}
+
+// =======================
+// GAME DATA (16 CARDS)
+// =======================
+const cardsData = getRandomCards();
+cardsData.sort(() => 0.5 - Math.random());
+
+// =======================
+// BACKGROUND MUSIC
+// =======================
+window.addEventListener("load", () => {
   const music = document.getElementById("bg-music");
-  music.volume = 0.3; // Keeps it soft
-  music.play().catch(error => {
-    console.log("Waiting for user interaction to play music...");
-    document.addEventListener('click', () => {
+  if (!music) return;
+
+  music.volume = 0.3;
+  music.play().catch(() => {
+    document.addEventListener("click", () => {
       music.play();
     }, { once: true });
   });
 });
 
-cardsData.sort(() => 0.5 - Math.random());
-
+// =======================
+// GAME VARIABLES
+// =======================
 const grid = document.getElementById("grid");
-
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let matchedPairs = 0;
+const totalPairs = cardsData.length / 2;
 
+// =======================
+// CREATE CARD ELEMENTS
+// =======================
 cardsData.forEach(item => {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -77,27 +116,27 @@ cardsData.forEach(item => {
   grid.appendChild(card);
 });
 
-  
-let matchedPairs = 0;
-const totalPairs = cardsData.length / 2;
-
+// =======================
+// CHECK MATCH
+// =======================
 function checkMatch() {
 
   if (firstCard.dataset.pair === secondCard.dataset.pair) {
 
-    lockBoard = true;
-
+    // STEP 1: Move to center
     firstCard.classList.add("match-join");
     secondCard.classList.add("match-join");
 
+    // STEP 2: Exit animation
     setTimeout(() => {
       firstCard.classList.remove("match-join");
       secondCard.classList.remove("match-join");
 
       firstCard.classList.add("match-exit");
       secondCard.classList.add("match-exit");
-    }, 900); 
+    }, 900);
 
+    // STEP 3: Remove cards
     setTimeout(() => {
       firstCard.classList.add("matched");
       secondCard.classList.add("matched");
@@ -112,7 +151,7 @@ function checkMatch() {
       }
 
       resetBoard();
-    }, 2600); 
+    }, 2600);
 
   } else {
     setTimeout(() => {
@@ -123,23 +162,26 @@ function checkMatch() {
   }
 }
 
-
-
+// =======================
+// RESET BOARD
+// =======================
 function resetBoard() {
   firstCard = null;
   secondCard = null;
-  lockBoard = false; 
+  lockBoard = false;
 }
 
+// =======================
+// WIN MESSAGE
+// =======================
 function showWinMessage() {
   document.getElementById("win-overlay").style.display = "flex";
-  
+
   lottie.loadAnimation({
     container: document.getElementById("lottie-win"),
     renderer: "svg",
     loop: true,
     autoplay: true,
-    path: "lottie/celebration.json" 
+    path: "lottie/celebration.json"
   });
-
 }
