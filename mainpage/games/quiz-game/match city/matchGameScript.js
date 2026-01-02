@@ -1,63 +1,161 @@
-  const gameData = {
-  indiaCapital: {
-    left: "States",
-    right: "Capitals",
+const levels = {
+  easy: {
+    count: 4,
+    categories: [
+      "seasonClothes",
+      "objectColor",
+      "occupationTools",
+      "bodyFunction"
+    ]
+  },
+  medium: {
+    count: 5,
+    categories: [
+      "stateFood",
+      "stateFestival",
+      "stateCapital",
+      "stateLanguage"
+    ]
+  },
+  hard: {
+    count: 7,
+    categories: [
+      "countryCapital",
+      "countryCurrency",
+      "countryMonument",
+      "countryContinent"
+    ]
+  }
+};
+
+const gameData = {
+  seasonClothes: {
+    left: "Season",
+    right: "Clothes",
     data: {
-      Gujarat: "Gandhinagar",
-      Maharashtra: "Mumbai",
-      Rajasthan: "Jaipur",
-      "Tamil Nadu": "Chennai",
-      Kerala: "Thiruvananthapuram",
-      Punjab: "Chandigarh",
-      Bihar: "Patna",
-      Odisha: "Bhubaneswar",
-      Assam: "Dispur",
-      Karnataka: "Bengaluru"
+      Winter: "Jacket",
+      Summer: "T-shirt",
+      Rainy: "Raincoat",
+      Spring: "Light Shirt",
+      Autumn: "Sweater",
+      Snow: "Coat",
+      Hot: "Cap",
+      Cold: "Woolen",
+      Foggy: "Hoodie",
+      Windy: "Jacket"
     }
   },
 
-  indiaFood: {
-    left: "States",
+  objectColor: {
+    left: "Object",
+    right: "Color",
+    data: {
+      Apple: "Red",
+      Banana: "Yellow",
+      Sky: "Blue",
+      Grass: "Green",
+      Milk: "White",
+      Coal: "Black",
+      Rose: "Pink",
+      Sun: "Yellow",
+      Cloud: "White",
+      Orange: "Orange"
+    }
+  },
+
+  occupationTools: {
+    left: "Occupation",
+    right: "Tool",
+    data: {
+      Doctor: "Stethoscope",
+      Farmer: "Plough",
+      Teacher: "Book",
+      Carpenter: "Hammer",
+      Painter: "Brush",
+      Chef: "Pan",
+      Tailor: "Needle",
+      Driver: "Steering",
+      Barber: "Scissors",
+      Electrician: "Tester"
+    }
+  },
+
+  bodyFunction: {
+    left: "Body Part",
+    right: "Function",
+    data: {
+      Heart: "Pump blood",
+      Eyes: "See",
+      Ears: "Hear",
+      Legs: "Walk",
+      Hands: "Hold",
+      Nose: "Smell",
+      Brain: "Think",
+      Lungs: "Breathe",
+      Teeth: "Chew",
+      Tongue: "Taste"
+    }
+  },
+
+  stateFood: {
+    left: "State",
     right: "Food",
     data: {
       Gujarat: "Dhokla",
       Punjab: "Makki di Roti",
       Rajasthan: "Dal Baati",
-      "Tamil Nadu": "Idli",
+      TamilNadu: "Idli",
       Maharashtra: "Vada Pav",
       Kerala: "Sadya",
-      Bihar: "Litti Chokha",
       Assam: "Masor Tenga",
-      "Jammu and kashmir": "Rogan Josh",
-      Telangana: "Hyderabadi Biryani"
+      Bihar: "Litti Chokha",
+      Telangana: "Biryani",
+      Odisha: "Pakhala"
     }
   },
 
-  indiaFestival: {
-    left: "States",
-    right: "Festivals",
+  stateFestival: {
+    left: "State",
+    right: "Festival",
     data: {
       Gujarat: "Navratri",
       Kerala: "Onam",
       Punjab: "Baisakhi",
-      "West Bengal": "Durga Puja",
+      Bengal: "Durga Puja",
       Maharashtra: "Ganesh Chaturthi",
       Assam: "Bihu",
       Rajasthan: "Teej",
       TamilNadu: "Pongal",
       Odisha: "Rath Yatra",
-      Karnataka: "Mysore Dasara"
+      Karnataka: "Dasara"
     }
   },
 
-  indiaLanguage: {
-    left: "States",
-    right: "Languages",
+  stateCapital: {
+    left: "State",
+    right: "Capital",
+    data: {
+      Gujarat: "Gandhinagar",
+      Maharashtra: "Mumbai",
+      Rajasthan: "Jaipur",
+      TamilNadu: "Chennai",
+      Kerala: "Thiruvananthapuram",
+      Punjab: "Chandigarh",
+      Assam: "Dispur",
+      Odisha: "Bhubaneswar",
+      Karnataka: "Bengaluru",
+      Bihar: "Patna"
+    }
+  },
+
+  stateLanguage: {
+    left: "State",
+    right: "Language",
     data: {
       Gujarat: "Gujarati",
       Punjab: "Punjabi",
-      "Tamil Nadu": "Tamil",
-      "West Bengal": "Bengali",
+      TamilNadu: "Tamil",
+      Bengal: "Bengali",
       Maharashtra: "Marathi",
       Kerala: "Malayalam",
       Assam: "Assamese",
@@ -67,9 +165,9 @@
     }
   },
 
-  worldCapital: {
-    left: "Countries",
-    right: "Capitals",
+  countryCapital: {
+    left: "Country",
+    right: "Capital",
     data: {
       India: "New Delhi",
       France: "Paris",
@@ -80,31 +178,61 @@
       Italy: "Rome",
       Canada: "Ottawa",
       Australia: "Canberra",
-      Brazil: "Brasília"
+      Brazil: "Brasilia"
     }
   },
 
-  worldMonument: {
-    left: "Countries",
-    right: "Monuments",
+  countryCurrency: {
+    left: "Country",
+    right: "Currency",
+    data: {
+      India: "Rupee",
+      USA: "Dollar",
+      UK: "Pound",
+      Japan: "Yen",
+      China: "Yuan",
+      Germany: "Euro",
+      France: "Euro",
+      Russia: "Ruble",
+      Brazil: "Real",
+      Australia: "Dollar"
+    }
+  },
+
+  countryMonument: {
+    left: "Country",
+    right: "Monument",
     data: {
       India: "Taj Mahal",
       France: "Eiffel Tower",
       China: "Great Wall",
       Egypt: "Pyramids",
-      Italy: "Tower of Pisa",
       USA: "Statue of Liberty",
-      Brazil: "Christ the Redeemer",
+      Brazil: "Christ Redeemer",
+      Italy: "Colosseum",
       Australia: "Opera House",
-      London: "Buckingham Palace",
-      Spain: "Sagrada Familia"
+      Spain: "Sagrada Familia",
+      UK: "Big Ben"
+    }
+  },
+
+  countryContinent: {
+    left: "Country",
+    right: "Continent",
+    data: {
+      India: "Asia",
+      France: "Europe",
+      Brazil: "South America",
+      USA: "North America",
+      Australia: "Australia",
+      Egypt: "Africa",
+      Japan: "Asia",
+      Germany: "Europe",
+      Canada: "North America",
+      Argentina: "South America"
     }
   }
 };
-
-let selectedLeft = null;
-let score = 0;
-let currentGame = {};
 
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
@@ -113,171 +241,24 @@ correctSound.volume = 0.6;
 wrongSound.volume = 0.6;
 
 let audioUnlocked = false;
-document.body.addEventListener("click", () => {
-  if (!audioUnlocked) {
-    correctSound.play().then(() => {
-      correctSound.pause();
-      correctSound.currentTime = 0;
-    }).catch(() => {});
 
-    wrongSound.play().then(() => {
-      wrongSound.pause();
-      wrongSound.currentTime = 0;
-    }).catch(() => {});
+function unlockAudioOnce() {
+  if (audioUnlocked) return;
 
-    audioUnlocked = true;
-  }
-}, { once: true });
+  correctSound.play().then(() => {
+    correctSound.pause();
+    correctSound.currentTime = 0;
+  }).catch(() => {});
 
-
-const leftDiv = document.getElementById("states");
-const rightDiv = document.getElementById("options");
-const message = document.getElementById("message");
-const scoreText = document.getElementById("score");
-const leftTitle = document.getElementById("leftTitle");
-const rightTitle = document.getElementById("rightTitle");
-const gameArea = document.querySelector(".game-area");
-const startHint = document.getElementById("startHint");
-
-
-
-
-function getRandomSubset(obj, count) {
-  const keys = Object.keys(obj)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, count);
-
-  const subset = {};
-  keys.forEach(k => subset[k] = obj[k]);
-  return subset;
-}
-
-function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-function clearSelection() {
-  document.querySelectorAll("#states .item")
-    .forEach(i => i.classList.remove("selected"));
-}
-
-
-function loadGame(type) {
-  
-
-  gameArea.style.display = "flex";
-  startHint.style.display = "none";
-
-  leftDiv.innerHTML = "";
-  rightDiv.innerHTML = "";
-  selectedLeft = null;
-  score = 0;
-
-  scoreText.innerText = "Score: 0 ⭐";
-  message.innerText = "Now choose the correct match 😊";
-
-  const fullGame = gameData[type];
-
-
-  
-  const selectedData = getRandomSubset(fullGame.data, 4);
-
-  currentGame = {
-    left: fullGame.left,
-    right: fullGame.right,
-    data: selectedData
-  };
-
-  leftTitle.innerText = currentGame.left;
-  rightTitle.innerText = currentGame.right;
-
-  
-  Object.keys(currentGame.data).forEach(item => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerText = item;
-    div.onclick = () => selectLeft(div, item);
-    leftDiv.appendChild(div);
-  });
-
-  
-  shuffle(Object.values(currentGame.data)).forEach(option => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerText = option;
-    div.onclick = () => checkAnswer(div, option);
-    rightDiv.appendChild(div);
-  });
-}
-
-function selectLeft(div, value) {
-  clearSelection();
-  div.classList.add("selected");
-  selectedLeft = value;
-}
-
-function checkAnswer(div, value) {
-  if (!selectedLeft) {
-    message.innerText = "Pick one from the left first!";
-    return;
-  }
-
-  const leftItem = [...document.querySelectorAll("#states .item")]
-    .find(i => i.innerText === selectedLeft);
-
-  if (currentGame.data[selectedLeft] === value) {
-
-    leftItem.style.pointerEvents = "none";
-    div.style.pointerEvents = "none";
-
-    leftItem.classList.add("highfive-left");
-    div.classList.add("highfive-right");
-
-    setTimeout(() => {
-      leftItem.classList.add("highfive-hold");
-      div.classList.add("highfive-hold");
-    }, 600);
-
-    setTimeout(() => {
-      leftItem.classList.remove("highfive-left", "highfive-hold");
-      div.classList.remove("highfive-right", "highfive-hold");
-
-      leftItem.classList.add("correct", "highfive-bounce");
-      div.classList.add("correct", "highfive-bounce");
-
-      score++;
-      scoreText.innerText = `Score: ${score} ⭐`;
-      message.innerText = "🎉 Awesome Match!";
-
-      correctSound.currentTime = 0;
-      correctSound.play().catch(() => {});
-
-      confettiAnim.goToAndPlay(0, true);
-      leftAnim.goToAndPlay(0, true);
-      rightAnim.goToAndPlay(0, true);
-
-      setTimeout(() => {
-        leftItem.classList.remove("highfive-bounce");
-        div.classList.remove("highfive-bounce");
-      }, 400);
-
-    }, 1000);
-
-    selectedLeft = null;
-  }
-
-  else {
-    div.classList.add("wrong");
-    message.innerText = "❌ Try again!";
+  wrongSound.play().then(() => {
+    wrongSound.pause();
     wrongSound.currentTime = 0;
-    wrongSound.play().catch(() => {});
+  }).catch(() => {});
 
-    setTimeout(() => div.classList.remove("wrong"), 600);
-  }
-
-  clearSelection();
+  audioUnlocked = true;
 }
 
+document.addEventListener("click", unlockAudioOnce, { once: true });
 
 
 const leftAnim = lottie.loadAnimation({
@@ -304,3 +285,171 @@ const confettiAnim = lottie.loadAnimation({
   path: "./lottie/success.json"
 });
 
+let currentLevel = null;
+let selectedLeft = null;
+let score = 0;
+let currentGame = {};
+
+const levelMenu = document.getElementById("levelMenu");
+const categoryMenu = document.getElementById("categoryMenu");
+const gameArea = document.getElementById("gameArea");
+const backWrapper = document.getElementById("backWrapper");
+
+const leftDiv = document.getElementById("states");
+const rightDiv = document.getElementById("options");
+const leftTitle = document.getElementById("leftTitle");
+const rightTitle = document.getElementById("rightTitle");
+const scoreText = document.getElementById("score");
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function getSubset(obj, count) {
+  const keys = shuffle(Object.keys(obj)).slice(0, count);
+  const res = {};
+  keys.forEach(k => res[k] = obj[k]);
+  return res;
+}
+
+function selectLevel(level) {
+  currentLevel = level;
+
+  levelMenu.style.display = "none";
+  categoryMenu.style.display = "block";
+  gameArea.style.display = "none";
+  backWrapper.style.display = "block";
+
+  document.getElementById("levelHint").style.display = "none";
+  document.getElementById("categoryHint").style.display = "flex";
+
+  categoryMenu.innerHTML = "";
+
+  levels[level].categories.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.innerText = gameData[cat].left + " → " + gameData[cat].right;
+    btn.onclick = () => loadGame(cat);
+    categoryMenu.appendChild(btn);
+  });
+}
+
+function loadGame(type) {
+  document.getElementById("categoryHint").style.display = "none";
+
+  gameArea.style.display = "flex";
+  score = 0;
+  scoreText.innerText = "Score: 0 ⭐";
+
+  const cfg = levels[currentLevel];
+  const full = gameData[type];
+  const selected = getSubset(full.data, cfg.count);
+
+  currentGame = { ...full, data: selected };
+
+  leftTitle.innerText = currentGame.left;
+  rightTitle.innerText = currentGame.right;
+
+  leftDiv.innerHTML = "";
+  rightDiv.innerHTML = "";
+  selectedLeft = null;
+
+  Object.keys(selected).forEach(k => {
+    const d = document.createElement("div");
+    d.className = "item";
+    d.innerText = k;
+    d.onclick = () => {
+      document.querySelectorAll("#states .item")
+        .forEach(i => i.classList.remove("selected"));
+      d.classList.add("selected");
+      selectedLeft = k;
+    };
+    leftDiv.appendChild(d);
+  });
+
+  shuffle(Object.values(selected)).forEach(v => {
+    const d = document.createElement("div");
+    d.className = "item";
+    d.innerText = v;
+    d.onclick = () => checkAnswer(d, v);
+    rightDiv.appendChild(d);
+  });
+}
+
+function checkAnswer(div, value) {
+  if (!selectedLeft) return;
+
+  const leftItem = [...leftDiv.children].find(i => i.innerText === selectedLeft);
+
+  if (currentGame.data[selectedLeft] === value) {
+    leftItem.style.pointerEvents = "none";
+    div.style.pointerEvents = "none";
+
+    leftItem.classList.add("highfive-left");
+    div.classList.add("highfive-right");
+
+    setTimeout(() => {
+      leftItem.classList.add("highfive-hold");
+      div.classList.add("highfive-hold");
+    }, 600);
+
+    setTimeout(() => {
+      leftItem.classList.remove("highfive-left","highfive-hold");
+      div.classList.remove("highfive-right","highfive-hold");
+      leftItem.classList.add("correct","highfive-bounce");
+      div.classList.add("correct","highfive-bounce");
+
+      score++;
+      scoreText.innerText = `Score: ${score} ⭐`;
+
+      correctSound.currentTime = 0;
+      correctSound.play().catch(()=>{});
+      confettiAnim.goToAndPlay(0,true);
+      leftAnim.goToAndPlay(0,true);
+      rightAnim.goToAndPlay(0,true);
+    }, 1000);
+
+    selectedLeft = null;
+  } else {
+    div.classList.add("wrong");
+    wrongSound.currentTime = 0;
+    wrongSound.play().catch(()=>{});
+    setTimeout(()=>div.classList.remove("wrong"),600);
+  }
+}
+
+function goBack() {
+  selectedLeft = null;
+  score = 0;
+  scoreText.innerText = "Score: 0 ⭐";
+
+  leftDiv.innerHTML = "";
+  rightDiv.innerHTML = "";
+
+  gameArea.style.display = "none";
+  categoryMenu.style.display = "none";
+  backWrapper.style.display = "none";
+
+  levelMenu.style.display = "block";
+  document.getElementById("categoryHint").style.display = "none";
+  document.getElementById("levelHint").style.display = "flex";
+}
+
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.25; 
+
+let bgStarted = false;
+
+function startBackgroundMusic() {
+  if (bgStarted) return;
+
+  bgMusic.play().then(() => {
+    bgStarted = true;
+    console.log("🎵 Background music started");
+  }).catch(() => {
+  
+  });
+}
+
+document.addEventListener("click", () => {
+  startBackgroundMusic();
+}, { once: true });
