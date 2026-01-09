@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderer: "svg",
     loop: true,
     autoplay: true,
-    path: "lottie/earth.json"
+    path: "lottie/Earth.json"
   });
 
   /* Left */
@@ -64,5 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     glare: true,
     "max-glare": 0.2
   });
+
 
 });
