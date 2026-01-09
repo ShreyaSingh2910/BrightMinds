@@ -60,9 +60,6 @@
   </div>
 
 <script>
-/* ============================
-   🔊 SOUND SETUP (ADDED)
-============================ */
 const bgSound = new Audio('assets/sounds/background.mp3');
 const correctSound = new Audio('assets/sounds/correctans.mp3');
 const wrongSound = new Audio('assets/sounds/wrongans.mp3');
@@ -72,14 +69,10 @@ bgSound.volume = 0.3;
 correctSound.volume = 1;
 wrongSound.volume = 1;
 
-/* Mobile-safe start */
 document.addEventListener('pointerdown', () => {
   if (bgSound.paused) bgSound.play().catch(() => {});
 }, { once: true });
 
-/* ============================
-   🧠 GAME LOGIC (UNCHANGED)
-============================ */
 let correctCount = 0;
 const totalParts = document.querySelectorAll('.drop-zone').length;
 
@@ -139,9 +132,6 @@ dropZones.forEach(zone => {
   });
 });
 
-/* ============================
-   🎬 LOTTIE (UNCHANGED)
-============================ */
 lottie.loadAnimation({
   container: document.getElementById('lottie-left'),
   renderer: 'svg',
@@ -165,10 +155,6 @@ const successAnim = lottie.loadAnimation({
   autoplay: false,
   path: 'lottie/anim1.json'
 });
-
-/* ============================
-   🎉 ACTIONS (UNCHANGED)
-============================ */
 function showCongrats() {
   document.getElementById('congrats-modal').classList.remove('hidden');
   successAnim.play();
@@ -188,3 +174,4 @@ function goBack() {
 
 </body>
 </html>
+
