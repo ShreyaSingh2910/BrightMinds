@@ -1,6 +1,4 @@
-/*********************************
- 🔊 AUDIO SETUP (GLOBAL CLICK – CLEAN)
-**********************************/
+
 const bgMusic = document.getElementById("bgMusic");
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
@@ -13,12 +11,10 @@ wrongSound.volume = 1;
 
 let audioStarted = false;
 
-/* ▶️ Start audio on FIRST user interaction anywhere */
 function startAudio() {
   if (audioStarted) return;
   audioStarted = true;
 
-  // unlock short sounds silently
   [correctSound, wrongSound].forEach(audio => {
     audio.muted = true;
     audio.play()
@@ -30,16 +26,11 @@ function startAudio() {
       .catch(() => {});
   });
 
-  // start background music immediately
   bgMusic.play().catch(() => {});
 }
 
-/* ✅ Listen for FIRST click/touch anywhere */
 window.addEventListener("pointerdown", startAudio, { once: true });
 
-/*********************************
- 🌍 GAME ELEMENTS
-**********************************/
 const planets = document.querySelectorAll(".planet");
 const panel = document.querySelector(".panel");
 const options = document.querySelectorAll(".options button");
@@ -52,9 +43,6 @@ let current = null;
 let hintIndex = 0;
 let solved = 0;
 
-/*********************************
- 📘 GAME DATA
-**********************************/
 const data = {
   Mercury: {
     options: ["Mercury", "Venus", "Earth", "Mars"],
@@ -102,10 +90,6 @@ const data = {
     hints: ["Farthest planet", "Very windy", "Blue"]
   }
 };
-
-/*********************************
- 🪐 PLANET CLICK HANDLER
-**********************************/
 planets.forEach(planet => {
   planet.addEventListener("click", () => {
     // 📝 hide start instruction on first planet click
@@ -132,9 +116,6 @@ startMessage?.classList.add("hide");
   });
 });
 
-/*********************************
- ✅❌ OPTION CLICK HANDLER
-**********************************/
 options.forEach(btn => {
   btn.addEventListener("click", () => {
     if (!current) return;
@@ -166,9 +147,6 @@ options.forEach(btn => {
   });
 });
 
-/*********************************
- 💡 HINT BUTTON
-**********************************/
 hintBtn.addEventListener("click", () => {
   if (!current) return;
 
@@ -177,4 +155,5 @@ hintBtn.addEventListener("click", () => {
   } else {
     hintText.textContent = "No more hints 🙂";
   }
+
 });
