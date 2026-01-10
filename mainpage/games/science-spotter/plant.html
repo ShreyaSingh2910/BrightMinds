@@ -8,17 +8,14 @@
 </head>
 <body>
 
-<!-- 🌈 Animated Background -->
 <div class="bg-bubbles"></div>
 
 <h1 class="title">🌱 Parts of a Plant</h1>
 <p class="instruction">Drag the correct name to the arrow</p>
 
-<!-- 🌿 IMAGE AREA -->
 <div class="plant-wrapper">
   <img src="assets/plant.png" class="plant-img" />
 
-  <!-- DROP ZONES -->
   <div class="drop-zone flower" data-answer="Flower"></div>
   <div class="drop-zone leaf" data-answer="Leaf"></div>
   <div class="drop-zone fruit" data-answer="Fruit"></div>
@@ -26,7 +23,6 @@
   <div class="drop-zone root" data-answer="Root"></div>
 </div>
 
-<!-- 🎮 OPTIONS -->
 <div class="options">
   <div class="label" draggable="true" data-name="Leaf">Leaf</div>
   <div class="label" draggable="true" data-name="Stem">Stem</div>
@@ -35,7 +31,6 @@
   <div class="label" draggable="true" data-name="Fruit">Fruit</div>
 </div>
 
-<!-- 🔊 AUDIO -->
 <audio id="bgMusic" loop preload="auto">
   <source src="assets/sounds/background.mp3" type="audio/mpeg">
 </audio>
@@ -48,15 +43,12 @@
   <source src="assets/sounds/wrongans.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ⬅ BACK BUTTON -->
 <button class="back-btn" onclick="goBack()" aria-label="Back">
   ←
 </button>
 
-<!-- 📘 LEARN BUTTON -->
 <button class="learn-btn" onclick="openLearn()">📘 Learn</button>
 
-<!-- 📖 LEARNING PANEL -->
 <div class="learn-panel hidden" id="learnPanel">
   <div class="learn-box">
     <button class="close-learn" onclick="closeLearn()">✖</button>
@@ -91,7 +83,6 @@
   </div>
 </div>
 
-<!-- 🎉 CELEBRATION OVERLAY -->
 <div id="celebration" class="celebration hidden">
   <div class="celebration-box">
     <div id="celebrateAnim" style="width:220px;margin:auto;"></div>
@@ -107,10 +98,10 @@
 </div>
 
 
-<!-- Lottie -->
 <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
 
 
 <script src="plant.js"></script>
 </body>
+
 </html>
