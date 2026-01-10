@@ -3,7 +3,6 @@
   font-family: "Comic Sans MS", "Baloo", "Poppins", cursive;
 }
 
-/* 🌌 Background (light purple space) */
 body {
   margin: 0;
   min-height: 100vh;
@@ -17,7 +16,6 @@ body {
   );
 }
 
-/* 🌍 Earth background */
 #earth-bg {
   position: fixed;
   inset: 0;
@@ -31,7 +29,6 @@ body {
   height: 100%;
 }
 
-/* 🧠 Title */
 .title {
   text-align: center;
   margin: 26px 10px;
@@ -42,11 +39,6 @@ body {
   text-shadow: 2px 3px 0 rgba(0,0,0,0.25);
 }
 
-
-
-
-
-/* 📐 Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -57,7 +49,6 @@ body {
   position: relative;
   z-index: 2;
 }
-/* 🔘 Card container (NO effects here) */
 .card {
   cursor: pointer;
   background: transparent;
@@ -93,7 +84,6 @@ body {
   display: block;
 }
 
-/* 🎨 Vibrant Gradients for each tile */
 .solar .card-inner {
   background: linear-gradient(135deg, #f2b705 0%, #ff8c00 100%);
 }
@@ -110,15 +100,11 @@ body {
   background: linear-gradient(135deg, #5a8dee 0%, #3498db 100%);
 }
 
-/* 🌟 Hover Glows - Matching the tile color */
 .solar:hover .card-inner { box-shadow: 0 12px 25px rgba(242, 183, 5, 0.5); }
 .body:hover .card-inner  { box-shadow: 0 12px 25px rgba(238, 82, 83, 0.5); }
 .plant:hover .card-inner { box-shadow: 0 12px 25px rgba(76, 175, 122, 0.5); }
 .matter:hover .card-inner { box-shadow: 0 12px 25px rgba(90, 141, 238, 0.5); }
 
-
-
-/* 🚀 Corner Lottie */
 .corner {
   position: fixed;
   bottom: 0;
@@ -130,4 +116,5 @@ body {
 }
 
 .corner.left  { left: 10px; }
+
 .corner.right { right: 10px; }
