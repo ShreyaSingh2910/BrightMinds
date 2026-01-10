@@ -4,7 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   color: white;
 
   background: linear-gradient(-45deg, #1a0b2e, #902ed6, #2d1b4f, #de8ee1);
@@ -236,3 +236,4 @@ body {
   background: #6a1b9a;
 
 }
+
