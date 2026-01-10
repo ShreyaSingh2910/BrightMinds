@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Comic Sans MS", "Baloo", "Poppins", cursive;
+font-family: 'Fredoka', sans-serif;
 }
 
 body {
@@ -49,4 +49,5 @@ body {
   transform: translateY(4px);
   box-shadow: 0 5px 0 #e68a00;
 }
+
 
