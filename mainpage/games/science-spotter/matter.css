@@ -1,7 +1,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Comic Sans MS", "Baloo", cursive;
+  font-family: 'Fredoka', sans-serif;
 }
 
 body {
@@ -379,4 +379,5 @@ body {
     opacity: 0;
   }
 }
+
 
