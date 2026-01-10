@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* 🌍 Earth */
   lottie.loadAnimation({
     container: document.getElementById("earth-bg"),
     renderer: "svg",
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     path: "lottie/Earth.json"
   });
 
-  /* Left */
   lottie.loadAnimation({
     container: document.getElementById("left-lottie"),
     renderer: "svg",
@@ -18,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     path: "lottie/Science.json"
   });
 
-  /* Right */
   lottie.loadAnimation({
     container: document.getElementById("right-lottie"),
     renderer: "svg",
@@ -27,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     path: "lottie/Energy-Rocket.json"
   });
 
-  /* Entrance animation */
   gsap.timeline()
     .from(".title", { y: -60, opacity: 0, duration: 0.8 })
     .from(".card", {
@@ -38,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "back.out(1.7)"
     }, "-=0.3");
 
-  /* Corner animation */
   gsap.to(".corner.left", {
     y: -25,
     rotation: -5,
@@ -57,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "sine.inOut"
   });
 
-  /* ✅ Tilt ONLY on inner */
   VanillaTilt.init(document.querySelectorAll(".card-inner"), {
     max: 10,
     speed: 500,
@@ -67,3 +61,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
