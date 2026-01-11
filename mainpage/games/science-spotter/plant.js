@@ -1,36 +1,24 @@
-
 const bgMusic = document.getElementById("bgMusic");
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
-let correctCount = 0;
-const TOTAL_PARTS = document.querySelectorAll(".drop-zone").length;
 
-
-bgMusic.volume = 0.30;
+bgMusic.volume = 0.3;
 correctSound.volume = 1;
 wrongSound.volume = 1;
 
 let audioStarted = false;
-
-function startAudio() {
-  if (audioStarted) return;
-  audioStarted = true;
-
-  [correctSound, wrongSound].forEach(sound => {
-    sound.muted = true;
-    sound.play().then(() => {
-      sound.pause();
-      sound.currentTime = 0;
-      sound.muted = false;
-    }).catch(() => {});
-  });
-
-  bgMusic.play().catch(() => {});
-}
-
-window.addEventListener("pointerdown", startAudio, { once: true });
+window.addEventListener(
+  "pointerdown",
+  () => {
+    if (audioStarted) return;
+    audioStarted = true;
+    bgMusic.play().catch(() => {});
+  },
+  { once: true }
+);
 
 let dragged = null;
+const userAnswers = {};
 
 document.querySelectorAll(".label").forEach(label => {
   label.addEventListener("dragstart", () => {
@@ -39,54 +27,114 @@ document.querySelectorAll(".label").forEach(label => {
 });
 
 document.querySelectorAll(".drop-zone").forEach(zone => {
-
   zone.addEventListener("dragover", e => e.preventDefault());
 
   zone.addEventListener("drop", () => {
     if (!dragged) return;
+    if (zone.dataset.locked === "true") return;
 
-    const answer = zone.dataset.answer;
+    const zoneId = zone.dataset.id;
 
-    if (dragged.dataset.name === answer && !zone.classList.contains("filled")) {
-  zone.textContent = dragged.textContent;
-  zone.classList.add("filled");
-
-  correctSound.currentTime = 0;
-  correctSound.play().catch(() => {});
-
-  dragged.remove();
-  correctCount++;
-
-  if (correctCount === TOTAL_PARTS) {
-    setTimeout(showCelebration, 600);
-  }
-}
-    
-    else {
-      wrongSound.currentTime = 0;
-      wrongSound.play().catch(() => {});
+    if (userAnswers[zoneId]) {
+      const prev = document.querySelector(
+        `.label[data-name="${userAnswers[zoneId]}"]`
+      );
+      if (prev) prev.style.visibility = "visible";
     }
 
+    zone.textContent = dragged.textContent;
+    userAnswers[zoneId] = dragged.dataset.name;
+
+    dragged.style.visibility = "hidden";
     dragged = null;
   });
 });
 
+function checkAnswers() {
+  let allCorrect = true;
+  let hasWrong = false;
 
-function goBack() {
-  // change this to your category / topic page
-  window.location.href = "topic.html";
+  document.querySelectorAll(".drop-zone").forEach(zone => {
+    const zoneId = zone.dataset.id;
+    const correct = zone.dataset.answer;
+    const user = userAnswers[zoneId];
+
+    zone.classList.remove("correct", "wrong");
+
+    if (!user) {
+      allCorrect = false;
+      hasWrong = true;
+      return;
+    }
+
+    if (user === correct) {
+      zone.classList.add("correct");
+      zone.dataset.locked = "true";
+    } else {
+      zone.classList.add("wrong");
+      hasWrong = true;
+      allCorrect = false;
+    }
+  });
+
+  if (hasWrong) {
+    wrongSound.currentTime = 0;
+    wrongSound.play().catch(() => {});
+
+    setTimeout(() => {
+      resetWrongAnswers();
+      shuffleOptions();
+    }, 1000);
+  }
+
+  if (allCorrect) {
+    playCorrectSoundForWhile();
+    setTimeout(showCelebration, 700);
+  }
 }
 
-function openLearn() {
-  document.getElementById("learnPanel").classList.remove("hidden");
+function resetWrongAnswers() {
+  document.querySelectorAll(".drop-zone.wrong").forEach(zone => {
+    const zoneId = zone.dataset.id;
+    const wrongPart = userAnswers[zoneId];
+
+    zone.textContent = "";
+    zone.classList.remove("wrong");
+
+    delete userAnswers[zoneId];
+
+    const option = document.querySelector(
+      `.label[data-name="${wrongPart}"]`
+    );
+    if (option) option.style.visibility = "visible";
+  });
 }
 
-function closeLearn() {
-  document.getElementById("learnPanel").classList.add("hidden");
+function shuffleOptions() {
+  const container = document.querySelector(".options");
+  const options = Array.from(container.children);
+
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  options.forEach(opt => container.appendChild(opt));
+}
+
+function playCorrectSoundForWhile() {
+  correctSound.currentTime = 0;
+  correctSound.play().catch(() => {});
+
+  setTimeout(() => {
+    correctSound.pause();
+    correctSound.currentTime = 0;
+  }, 1500);
 }
 
 function showCelebration() {
-  document.getElementById("celebration").classList.remove("hidden");
+  const celebration = document.getElementById("celebration");
+  celebration.classList.remove("hidden");
 
   lottie.loadAnimation({
     container: document.getElementById("celebrateAnim"),
@@ -97,4 +145,14 @@ function showCelebration() {
   });
 }
 
+function goBack() {
+  window.location.href = "topic.html";
+}
 
+function openLearn() {
+  document.getElementById("learnPanel").classList.remove("hidden");
+}
+
+function closeLearn() {
+  document.getElementById("learnPanel").classList.add("hidden");
+}
