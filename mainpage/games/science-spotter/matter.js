@@ -1,3 +1,20 @@
+function saveGameScore(gameName, score) {
+  const email = localStorage.getItem("userEmail");
+  if (!email) return;
+
+  fetch("http://localhost:8080/api/game/saveScore", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: email,
+      gameName: gameName,
+      score: score
+    })
+  }).catch(err => console.error("Score save failed", err));
+}
+
+
+
 let dragged = null;
 let placedCount = 0;          
 const TOTAL_ITEMS = 6; 
@@ -106,6 +123,7 @@ wrongSound.play();
   });
 });
 function showWinMessage() {
+  saveGameScore("statesOfMatter", 100);
   const overlay = document.getElementById("win-overlay");
   overlay.style.display = "flex";
 
@@ -127,4 +145,5 @@ function toggleLearn() {
 function goBack() {
   window.location.href = "topic.html";
 }
+
 
