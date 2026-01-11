@@ -11,16 +11,16 @@
 <div class="bg-bubbles"></div>
 
 <h1 class="title">🌱 Parts of a Plant</h1>
-<p class="instruction">Drag the correct name to the arrow</p>
+<p class="instruction">Drag the names to any arrow, then click Complete</p>
 
 <div class="plant-wrapper">
   <img src="assets/plant.png" class="plant-img" />
 
-  <div class="drop-zone flower" data-answer="Flower"></div>
-  <div class="drop-zone leaf" data-answer="Leaf"></div>
-  <div class="drop-zone fruit" data-answer="Fruit"></div>
-  <div class="drop-zone stem" data-answer="Stem"></div>
-  <div class="drop-zone root" data-answer="Root"></div>
+  <div class="drop-zone flower" data-id="flower" data-answer="Flower"></div>
+  <div class="drop-zone leaf"   data-id="leaf"   data-answer="Leaf"></div>
+  <div class="drop-zone fruit"  data-id="fruit"  data-answer="Fruit"></div>
+  <div class="drop-zone stem"   data-id="stem"   data-answer="Stem"></div>
+  <div class="drop-zone root"   data-id="root"   data-answer="Root"></div>
 </div>
 
 <div class="options">
@@ -31,24 +31,9 @@
   <div class="label" draggable="true" data-name="Fruit">Fruit</div>
 </div>
 
-<audio id="bgMusic" loop preload="auto">
-  <source src="assets/sounds/background.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="correctSound" preload="auto">
-  <source src="assets/sounds/correctans.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="wrongSound" preload="auto">
-  <source src="assets/sounds/wrongans.mp3" type="audio/mpeg">
-</audio>
-
-<button class="back-btn" onclick="goBack()" aria-label="Back">
-  ←
-</button>
-
-<button class="learn-btn" onclick="openLearn()">📘 Learn</button>
-
+<div class="complete-wrapper">
+  <button class="complete-btn" onclick="checkAnswers()">✅ Check</button>
+</div>
 <div class="learn-panel hidden" id="learnPanel">
   <div class="learn-box">
     <button class="close-learn" onclick="closeLearn()">✖</button>
@@ -83,25 +68,33 @@
   </div>
 </div>
 
+<button class="learn-btn" onclick="openLearn()">📘 Learn</button>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="assets/sounds/background.mp3" type="audio/mpeg">
+</audio>
+<audio id="correctSound" preload="auto">
+  <source src="assets/sounds/correctans.mp3" type="audio/mpeg">
+</audio>
+<audio id="wrongSound" preload="auto">
+  <source src="assets/sounds/wrongans.mp3" type="audio/mpeg">
+</audio>
+
+<button class="back-btn" onclick="goBack()">←</button>
+
 <div id="celebration" class="celebration hidden">
   <div class="celebration-box">
     <div id="celebrateAnim" style="width:220px;margin:auto;"></div>
-
     <h2>🎉 Amazing!</h2>
     <p>You named all parts of the plant!</p>
-
     <div class="celebration-buttons">
-      <button class="replay-btn" onclick="location.reload()">Replay</button>
-      <button class="back-btn2" onclick="goBack()">Back</button>
+      <button onclick="location.reload()">Replay</button>
+      <button onclick="goBack()">Back</button>
     </div>
   </div>
 </div>
 
-
 <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
-
-
 <script src="plant.js"></script>
 </body>
-
 </html>
