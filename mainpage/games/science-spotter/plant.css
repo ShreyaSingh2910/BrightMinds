@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Comic Sans MS", "Baloo", cursive;
 }
 
 html, body {
@@ -21,7 +21,6 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-
 
 .bg-bubbles {
   position: fixed;
@@ -92,7 +91,6 @@ body {
   justify-content: center;
 }
 
-/* correct */
 .drop-zone.filled {
   background: #c8e6c9;
   border-color: #4caf50;
@@ -298,12 +296,6 @@ body {
     width: 260px;
   }
 
-  .flower { left: 190px; right: auto; }
-  .leaf   { left: 190px; right: auto; }
-  .fruit  { left: 190px; right: auto; }
-  .stem   { left: 190px; right: auto; }
-  .root   { left: 190px; right: auto; }
-
   .options {
     gap: 10px;
   }
@@ -314,7 +306,6 @@ body {
   }
 }
 
-
 @media (max-width: 480px) {
 
   .plant-wrapper {
@@ -323,9 +314,9 @@ body {
   }
 
   .drop-zone {
-    width: 100px;          /* 🔽 reduced */
-    height: 28px;          /* 🔽 reduced */
-    font-size: 12px;       /* 🔽 text smaller */
+    width: 100px;         
+    height: 28px;         
+    font-size: 12px;       
     border-radius: 14px;
   }
 
@@ -415,4 +406,52 @@ body {
   transform: scale(0.96);
 }
 
+.drop-zone.correct {
+  border-style: solid;
+}
 
+.drop-zone.wrong {
+  border-style: solid;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+.drop-zone.correct {
+  background: #c8e6c9;
+  border-color: #4caf50;
+}
+
+.drop-zone.wrong {
+  background: #fdecea;
+  border-color: #f44336;
+}
+
+.complete-wrapper {
+  margin-bottom: 40px;
+}
+
+.complete-btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  background: linear-gradient(135deg, #fff9c4, #5b974c);
+  color: #5d4037;
+
+  box-shadow: 0 6px 0 #70af77, 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.complete-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #75bc7a;
+}
