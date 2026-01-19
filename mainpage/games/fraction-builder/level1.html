@@ -14,16 +14,13 @@
     Build the fraction: <b>3 / 4</b>
   </p>
 
-  <!-- WHOLE CIRCLE AREA -->
   <div class="whole-area" id="dropZone">
 
-    <!-- ✅ EMPTY SVG (JavaScript will draw the circle & lines here) -->
     <svg viewBox="0 0 200 200"
          class="whole-circle"
          id="wholeSVG">
     </svg>
 
-    <!-- ✅ SVG where filled parts appear -->
     <svg viewBox="0 0 200 200"
          class="filled"
          id="filledSVG">
@@ -31,7 +28,6 @@
 
   </div>
 
-  <!-- PARTS TRAY -->
   <div class="parts-area">
     <div class="part-item" draggable="true"></div>
     <div class="part-item" draggable="true"></div>
@@ -43,11 +39,9 @@
   <p class="result" id="resultMsg"></p>
 
 </div>
-<!-- 🎉 SUCCESS OVERLAY -->
+
 <div class="success-overlay" id="successOverlay">
   <div class="success-card">
-    
-    <!-- LOTTIE -->
     <div id="successLottie" class="lottie-box"></div>
 
     <h2>🎉 Great Job!</h2>
@@ -59,13 +53,11 @@
     </div>
   </div>
 </div>
-<!-- 🎵 Background Music -->
+
 <audio id="bgMusic" src="sound/bg-music.mp3" loop preload="auto"></audio>
 
-<!-- 🔊 Sound Effects -->
 <audio id="correctSound" src="sound/correct.mp3" preload="auto"></audio>
 <audio id="wrongSound" src="sound/wrong.mp3" preload="auto"></audio>
-<!-- LOTTIE PLAYER -->
 
 <button class="back-btn-small" onclick="goBack()">←</button>
 
@@ -73,4 +65,5 @@
 
 <script src="level1.js"></script>
 </body>
+
 </html>
