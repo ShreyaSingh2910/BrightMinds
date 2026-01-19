@@ -1,6 +1,7 @@
+/* RESET */
 * {
   box-sizing: border-box;
- font-family: 'Fredoka', sans-serif;
+  font-family: "Comic Sans MS", "Baloo", cursive;
 }
 
 body {
@@ -15,11 +16,37 @@ body {
     linear-gradient(180deg, #3b5bdb, #1c2fa3);
 }
 
-.game-wrapper {
-  width: 90%;
-  max-width: 520px;
+.desktop-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 5px; /* ⬅ reduced from 48px */
+  align-items: center;
+  width: 100%;
+  max-width: 1150px;
+  z-index: 1;
 }
 
+/* Center game perfectly */
+.game-center {
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.tip-box {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.game-wrapper {
+  width: 100%;
+  max-width: 520px;
+  
+}
+
+
+/* TOP BAR */
 .top-bar {
   display: flex;
   align-items: center;
@@ -28,8 +55,16 @@ body {
   margin-bottom: 18px;
 }
 
+.skill-meter {
+  background: rgba(255,255,255,0.25);
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+}
+
+/* PROGRESS */
 .progress-bar {
-  width: 70%;
+  width: 45%;
   height: 10px;
   background: rgba(255,255,255,0.2);
   border-radius: 10px;
@@ -40,9 +75,9 @@ body {
   height: 100%;
   width: 0%;
   background: #51cf66;
-  transition: width 0.4s ease;
 }
 
+/* QUESTION CARD */
 .question-card {
   background: linear-gradient(180deg, #2a3dbf, #1c2fa3);
   padding: 30px;
@@ -52,11 +87,7 @@ body {
   color: white;
 }
 
-.question-card h2 {
-  margin-bottom: 25px;
-  font-size: 1.4rem;
-}
-
+/* OPTIONS */
 .options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -71,13 +102,174 @@ body {
   cursor: pointer;
   background: #4dabf7;
   color: white;
-  transition: transform 0.2s ease;
 }
 
-.options button:hover {
-  transform: scale(1.06);
+
+.learning-panel {
+  border-radius: 30px;
+  overflow: hidden;
+
+  /* ✅ REAL COLOR (NOT TRANSPARENT) */
+  background: linear-gradient(
+    180deg,
+    #2210c6f5,
+    #2f3fae
+  );
+
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+  color: white;
 }
 
+
+.learning-header {
+  padding: 18px 22px;
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  background: linear-gradient(180deg, #1d40b4, #3742d3);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.learning-body p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  opacity: 0.96;
+}
+
+.learning-body b {
+  color: #ffd43b;
+}
+
+
+/* Badge */
+.topic-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  margin-top: 10px;
+  margin-left:10px;
+
+  background: rgba(255,255,255,0.25);
+}
+
+/* Topic title */
+.learning-body h4 {
+  margin: 0 0 10px 15px;;
+  font-size: 1.15rem;
+  color: #ffd43b;
+}
+
+.example-box {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(10, 148, 203, 0.35),
+    rgba(0,0,0,0.2)
+  );
+
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+.example-box p {
+  margin: 4px 0;
+}
+
+.topic-badge {
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 20px;
+
+  background: linear-gradient(180deg, #028ffb, #058bf8);
+  color: #ffffff;
+
+  cursor: pointer;
+  box-shadow: 0 4px 0 #1864ab;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #1864ab;
+}
+
+.desktop-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  max-width: 1150px;
+  z-index: 1;
+}
+
+
+@media (max-width: 768px) {
+  .desktop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-panel {
+    display: none;
+  }
+}
+
+/* ===============================
+   📘 TIP CONTENT SIZE + CENTER
+================================ */
+#topic-tip {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ===============================
+   ✅ / ❌ ANSWER FEEDBACK
+================================ */
+.options button.correct {
+  background: #51cf66 !important;
+  box-shadow: 0 0 12px rgba(81,207,102,0.8);
+}
+
+.options button.wrong {
+  background: #ff6b6b !important;
+  animation: shake 0.3s;
+}
+
+.options button:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* 🎉 POPUP OVERLAY */
 .popup {
   position: fixed;
   inset: 0;
@@ -85,17 +277,17 @@ body {
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
+/* POPUP CARD */
 .popup-card {
-  background: #ffffff;             
+  background: #ffffff;
   padding: 36px;
   border-radius: 30px;
   text-align: center;
-  color: #1c2fa3;                  
-
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.35);
+  color: #1c2fa3;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
 }
 
 .popup-card h1 {
@@ -109,21 +301,11 @@ body {
   color: #364fc7;
 }
 
-
+/* POPUP BUTTONS */
 .popup-buttons {
   display: flex;
   justify-content: center;
   gap: 16px;
-}
-
-.popup-buttons button:first-child {
-  background: linear-gradient(180deg, #51cf66, #2f9e44);
-  color: #ffffff;
-}
-
-.popup-buttons button:last-child {
-  background: linear-gradient(180deg, #74c0fc, #4dabf7);
-  color: #ffffff;
 }
 
 .popup-buttons button {
@@ -132,15 +314,24 @@ body {
   border-radius: 24px;
   border: none;
   cursor: pointer;
-
+  color: #fff;
   box-shadow: 0 5px 0 rgba(0,0,0,0.2);
   transition: transform 0.2s ease;
+}
+
+.popup-buttons button:first-child {
+  background: linear-gradient(180deg, #51cf66, #2f9e44);
+}
+
+.popup-buttons button:last-child {
+  background: linear-gradient(180deg, #74c0fc, #4dabf7);
 }
 
 .popup-buttons button:hover {
   transform: scale(1.05);
 }
 
+/* 🌈 BACKGROUND ANIMATIONS */
 .bg-animations {
   position: fixed;
   inset: 0;
@@ -159,6 +350,7 @@ body {
   animation: floatUp linear infinite;
 }
 
+/* Individual bubbles */
 .bg-animations span:nth-child(1) {
   left: 8%;
   width: 28px;
@@ -201,6 +393,7 @@ body {
   animation-duration: 15s;
 }
 
+/* Floating animation */
 @keyframes floatUp {
   from {
     transform: translateY(0) scale(0.8);
@@ -217,33 +410,34 @@ body {
   }
 }
 
-.back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
+/* ===============================
+   📱 MOBILE SPACING FIX
+================================ */
+@media (max-width: 768px) {
 
-  padding: 8px 18px;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 20px;
+  body {
+    padding: 16px; /* space from screen edges */
+    align-items: center;
+  }
 
-  background: linear-gradient(180deg, #028ffb, #058bf8);
-  color: #ffffff;
+  .desktop-layout {
+    width: 100%;
+    max-width: 100%;
+    gap: 0;
+  }
 
-  cursor: pointer;
+  .game-wrapper {
+    width: 100%;
+    max-width: 420px; /* makes it look centered & compact */
+    margin: 40px auto 0; /* top spacing + center */
+  }
 
-  box-shadow: 0 4px 0 #1864ab;
-  transition: all 0.2s ease;
+  .question-card {
+    margin: 0 auto;
+    padding: 24px; /* slightly smaller padding */
+  }
+
+  .top-bar {
+    margin-bottom: 14px;
+  }
 }
-
-.back-btn:hover {
-  transform: scale(1.05);
-}
-
-.back-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #1864ab;
-}
-
-
