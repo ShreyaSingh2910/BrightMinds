@@ -50,13 +50,27 @@ function playWrongSound() {
   }, 500);
 }
 
-const fractions = [
+const ALL_FRACTIONS = [
+  
   { numerator: 1, denominator: 2 },
   { numerator: 2, denominator: 3 },
-  { numerator: 3, denominator: 4 }, 
+  { numerator: 3, denominator: 5 },
+  { numerator: 1, denominator: 3 },
   { numerator: 2, denominator: 5 },
-  { numerator: 3, denominator: 5 }
+  { numerator: 3, denominator: 4 },
+  { numerator: 4, denominator: 5 },
+  { numerator: 1, denominator: 4 },
+  { numerator: 2, denominator: 4 },
+  { numerator: 3, denominator: 4 }
+ 
 ];
+
+function getRandomFractions(pool, count) {
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+const fractions = getRandomFractions(ALL_FRACTIONS, 5);
 
 let currentIndex = 0;
 let currentFraction;
@@ -119,6 +133,7 @@ function drawWholeCircle(denominator) {
     wholeSVG.appendChild(line);
   }
 }
+
 function drawWholeSquare() {
   const start = 20;
   const size = 160;
@@ -304,5 +319,4 @@ backBtn.addEventListener("click", () => {
 function goBack() {
   window.location.href="fraction.html";
 }
-
 
