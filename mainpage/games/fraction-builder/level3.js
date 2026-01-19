@@ -1,9 +1,7 @@
-/* ================= 🔊 AUDIO SETUP ================= */
 const bgMusic = document.getElementById("bgMusic");
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
 
-/* 🎵 Start background music ONCE (mobile safe) */
 function startBgMusic() {
   if (!bgMusic) return;
 
@@ -17,7 +15,6 @@ function startBgMusic() {
 document.addEventListener("click", startBgMusic);
 document.addEventListener("touchstart", startBgMusic);
 
-/* ✅ Correct sound */
 function playCorrectSound() {
   if (!correctSound) return;
 
@@ -32,7 +29,6 @@ function playCorrectSound() {
   }, 700);
 }
 
-/* ❌ Wrong sound */
 function playWrongSound() {
   if (!wrongSound) return;
 
@@ -47,7 +43,6 @@ function playWrongSound() {
   }, 500);
 }
 
-/* ================= 🎯 FRACTION DATA ================= */
 const allData = [
   { a:{n:1,d:4}, b:{n:3,d:4} },
   { a:{n:1,d:2}, b:{n:1,d:3} },
@@ -61,12 +56,10 @@ const allData = [
   { a:{n:5,d:6}, b:{n:2,d:4} }
 ];
 
-/* 🎲 Pick random 5 */
 const data = allData.sort(() => Math.random() - 0.5).slice(0, 5);
 
 let index = 0;
 
-/* ================= ELEMENTS ================= */
 const leftSVG = document.getElementById("leftSVG");
 const rightSVG = document.getElementById("rightSVG");
 const leftText = document.getElementById("leftText");
@@ -75,10 +68,8 @@ const resultMsg = document.getElementById("resultMsg");
 const symbolBox = document.getElementById("symbolBox");
 const celebration = document.getElementById("celebration");
 
-/* ================= INIT ================= */
 load();
 
-/* ================= LOAD QUESTION ================= */
 function load() {
   resultMsg.textContent = "";
   symbolBox.textContent = "VS";
@@ -92,7 +83,6 @@ function load() {
   draw(rightSVG, q.b.n, q.b.d);
 }
 
-/* ================= DRAW CIRCLE ================= */
 function draw(svg, n, d) {
   svg.innerHTML = "";
   const angle = 360 / d;
@@ -124,14 +114,12 @@ function draw(svg, n, d) {
   svg.appendChild(circle);
 }
 
-/* ================= OPTION BUTTONS ================= */
 document.querySelectorAll(".options button").forEach(btn => {
   btn.addEventListener("click", () => {
     check(btn.dataset.symbol);
   });
 });
 
-/* ================= CHECK ANSWER ================= */
 function check(symbol) {
   const q = data[index];
 
@@ -172,7 +160,6 @@ function check(symbol) {
   }
 }
 
-/* ================= 🎉 CELEBRATION ================= */
 let celebrationAnim = null;
 
 function showCelebration() {
@@ -191,12 +178,10 @@ function showCelebration() {
 const replayBtn = document.getElementById("replayBtn");
 const backBtn = document.getElementById("backBtn");
 
-/* 🔁 Replay */
 replayBtn.addEventListener("click", () => {
   window.location.reload();
 });
 
-/* ⬅ Back */
 backBtn.addEventListener("click", () => {
   window.history.back();
   // OR use a fixed page:
@@ -205,3 +190,4 @@ backBtn.addEventListener("click", () => {
 function goBack() {
   window.location.href="fraction.html";
 }
+
