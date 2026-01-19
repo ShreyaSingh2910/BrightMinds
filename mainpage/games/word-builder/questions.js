@@ -1,158 +1,130 @@
-const questions = [
+export const questionBank = {
+easy :[
+  { sentence: "She bought ___ apple.", options: ["a", "an", "the", "no article"], answer: "an", topic: "Articles" },
+  { sentence: "The dog is very ___.", options: ["big", "run", "quickly", "eat"], answer: "big", topic: "Adjectives" },
+  { sentence: "He ___ football every day.", options: ["play", "plays", "played", "playing"], answer: "plays", topic: "Verbs" },
+  { sentence: "She speaks very ___.", options: ["slow", "slowly", "slowness", "slower"], answer: "slowly", topic: "Adverbs" },
+  { sentence: "This is ___ pen.", options: ["I", "me", "my", "mine"], answer: "my", topic: "Pronouns" },
+  { sentence: "Two ___ are barking.", options: ["dog", "dogs", "doges", "doggy"], answer: "dogs", topic: "Singular/Plural" },
+  { sentence: "___ sun rises in the east.", options: ["A", "An", "The", "No article"], answer: "The", topic: "Articles" },
+  { sentence: "A ___ barks loudly.", options: ["cat", "dog", "run", "blue"], answer: "dog", topic: "Nouns" },
+  { sentence: "She is a ___ girl.", options: ["kind", "kindly", "kindness", "kinded"], answer: "kind", topic: "Adjectives" },
+  { sentence: "Birds ___ in the sky.", options: ["fly", "flying", "flew", "flies"], answer: "fly", topic: "Verbs" },
+  { sentence: "He runs ___.", options: ["quick", "quickly", "quicker", "quickness"], answer: "quickly", topic: "Adverbs" },
+  { sentence: "That bag is ___.", options: ["her", "she", "hers", "him"], answer: "hers", topic: "Pronouns" },
+  { sentence: "One ___ is missing.", options: ["child", "children", "childs", "childes"], answer: "child", topic: "Singular/Plural" },
+  { sentence: "I see ___ elephant.", options: ["a", "an", "the", "no article"], answer: "an", topic: "Articles" },
+  { sentence: "The ___ is barking.", options: ["dog", "run", "blue", "fast"], answer: "dog", topic: "Nouns" }
+],
 
+medium: [
   {
-    question: "She ___ to school every day.",
-    options: ["go", "goes", "going", "gone"],
-    answer: "goes"
+    sentence: "She ___ not like tea, but she drinks coffee.",
+    options: ["do", "does", "did", "is"],
+    answer: "does",
+    topic: "Negatives"
   },
   {
-    question: "They ___ playing in the park now.",
-    options: ["is", "are", "was", "were"],
-    answer: "are"
-  },
-  {
-    question: "He ___ his homework yesterday.",
-    options: ["do", "does", "did", "doing"],
-    answer: "did"
-  },
-  {
-    question: "We ___ watching a movie now.",
-    options: ["is", "are", "was", "were"],
-    answer: "are"
-  },
-  {
-    question: "She ___ already finished her work.",
+    sentence: "I ___ already finished my homework.",
     options: ["have", "has", "had", "having"],
-    answer: "has"
-  },
-
-  {
-    question: "I saw ___ elephant at the zoo.",
-    options: ["a", "an", "the", "no article"],
-    answer: "an"
+    answer: "have",
+    topic: "Present Perfect"
   },
   {
-    question: "He bought ___ new book.",
-    options: ["a", "an", "the", "no article"],
-    answer: "a"
+    sentence: "He was tired, ___ he continued working.",
+    options: ["but", "because", "so", "and"],
+    answer: "but",
+    topic: "Conjunctions"
   },
   {
-    question: "___ sun rises in the east.",
-    options: ["A", "An", "The", "No article"],
-    answer: "The"
+    sentence: "They ___ watching TV when I called them.",
+    options: ["are", "were", "is", "be"],
+    answer: "were",
+    topic: "Past Continuous"
   },
   {
-    question: "She wants ___ apple.",
-    options: ["a", "an", "the", "no article"],
-    answer: "an"
+    sentence: "She ___ a teacher before she became a writer.",
+    options: ["was", "is", "were", "be"],
+    answer: "was",
+    topic: "Past Tense"
   },
   {
-    question: "This is ___ best day of my life.",
-    options: ["a", "an", "the", "no article"],
-    answer: "the"
-  },
-
-  {
-    question: "Add punctuation: What is your name___",
-    options: [".", "?", "!", ","],
-    answer: "?"
+    sentence: "We did ___ understand the instructions clearly.",
+    options: ["not", "never", "no", "none"],
+    answer: "not",
+    topic: "Negatives"
   },
   {
-    question: "Add punctuation: Wow that is amazing___",
-    options: [".", "?", "!", ","],
-    answer: "!"
+    sentence: "This is the ___ book I have ever read.",
+    options: ["best", "better", "good", "well"],
+    answer: "best",
+    topic: "Comparatives"
   },
   {
-    question: "Add punctuation: I like apples oranges and bananas___",
-    options: [".", "?", "!", ","],
-    answer: "."
+    sentence: "I wanted to go out, ___ it was raining heavily.",
+    options: ["but", "and", "because", "so"],
+    answer: "but",
+    topic: "Conjunctions"
   },
   {
-    question: "Add punctuation: Stop___",
-    options: [".", "?", "!", ","],
-    answer: "!"
+    sentence: "He ___ to school before it started raining.",
+    options: ["went", "goes", "going", "go"],
+    answer: "went",
+    topic: "Past Tense"
   },
   {
-    question: "Add punctuation: Can you help me___",
-    options: [".", "?", "!", ","],
-    answer: "?"
-  },
-
-  {
-    question: "Choose correct word: Their / There / They're house is big.",
-    options: ["Their", "There", "They're", "None"],
-    answer: "Their"
+    sentence: "She ___ finished her work by the time we arrived.",
+    options: ["had", "has", "have", "having"],
+    answer: "had",
+    topic: "Past Perfect"
   },
   {
-    question: "Choose correct word: I want to ___ a movie.",
-    options: ["sea", "see", "cee", "sie"],
-    answer: "see"
+    sentence: "They ___ not ready when the class began.",
+    options: ["were", "are", "is", "be"],
+    answer: "were",
+    topic: "Negatives"
   },
   {
-    question: "Choose correct word: The ___ is shining.",
-    options: ["son", "sun", "san", "sin"],
-    answer: "sun"
+    sentence: "I don’t know ___ is knocking at the door.",
+    options: ["who", "whom", "which", "what"],
+    answer: "who",
+    topic: "Pronouns"
   },
   {
-    question: "Choose correct word: I ___ my toy.",
-    options: ["lost", "loss", "lose", "loose"],
-    answer: "lost"
+    sentence: "He studied hard ___ he could pass the exam.",
+    options: ["so", "but", "because", "and"],
+    answer: "so",
+    topic: "Conjunctions"
   },
   {
-    question: "Choose correct word: She has ___ friends.",
-    options: ["too", "two", "to", "tu"],
-    answer: "two"
-  },
-
-  {
-    question: "He ___ not like ice cream.",
-    options: ["do", "does", "did", "doing"],
-    answer: "does"
+    sentence: "She ___ cooking dinner while he was cleaning.",
+    options: ["was", "is", "were", "be"],
+    answer: "was",
+    topic: "Past Continuous"
   },
   {
-    question: "We ___ happy today.",
-    options: ["is", "are", "was", "were"],
-    answer: "are"
-  },
-  {
-    question: "___ you help me, please?",
-    options: ["Can", "Did", "Do", "Does"],
-    answer: "Can"
-  },
-  {
-    question: "She ___ singing very well.",
-    options: ["is", "are", "was", "were"],
-    answer: "is"
-  },
-  {
-    question: "I ___ my bag at home.",
-    options: ["forget", "forgot", "forgetting", "forgets"],
-    answer: "forgot"
-  },
-
-  {
-    question: "Choose correct sentence ending: I am happy___",
-    options: [".", "?", "!", ","],
-    answer: "."
-  },
-  {
-    question: "Choose correct word: He ran ___ the park.",
-    options: ["to", "too", "two", "tu"],
-    answer: "to"
-  },
-  {
-    question: "She ___ a beautiful dress.",
-    options: ["wear", "wears", "wearing", "wore"],
-    answer: "wears"
-  },
-  {
-    question: "The dog ___ loudly.",
-    options: ["bark", "barks", "barking", "barked"],
-    answer: "barks"
-  },
-  {
-    question: "We ___ our teacher.",
-    options: ["respect", "respects", "respecting", "respected"],
-    answer: "respect"
+    sentence: "That was ___ interesting movie than I expected.",
+    options: ["more", "most", "very", "much"],
+    answer: "more",
+    topic: "Comparatives"
   }
-];
+],
+
+ hard : [
+  { sentence: "She ___ have finished by now.", options: ["must", "can", "has", "had"], answer: "must", topic: "Modal Verbs" },
+  { sentence: "He ___ be at home.", options: ["might", "has", "had", "is"], answer: "might", topic: "Modal Verbs" },
+  { sentence: "I ___ been waiting for hours.", options: ["have", "has", "had", "having"], answer: "have", topic: "Perfect Tense" },
+  { sentence: "This is ___ than yesterday.", options: ["better", "best", "good", "well"], answer: "better", topic: "Comparatives" },
+  { sentence: "She ___ completed the task.", options: ["has", "have", "had", "having"], answer: "has", topic: "Perfect Tense" },
+  { sentence: "___ you ever seen this movie?", options: ["Have", "Has", "Did", "Do"], answer: "Have", topic: "Question Formation" },
+  { sentence: "He ___ not have said that.", options: ["should", "must", "could", "has"], answer: "should", topic: "Modal Verbs" },
+  { sentence: "This is the ___ building here.", options: ["tallest", "taller", "tall", "more tall"], answer: "tallest", topic: "Superlatives" },
+  { sentence: "She ___ been studying all night.", options: ["has", "have", "had", "having"], answer: "has", topic: "Perfect Continuous" },
+  { sentence: "___ I open the window?", options: ["May", "Do", "Did", "Have"], answer: "May", topic: "Modal Verbs" },
+  { sentence: "He asked ___ I was ready.", options: ["if", "that", "what", "which"], answer: "if", topic: "Question Formation" },
+  { sentence: "This problem is ___ than the last one.", options: ["harder", "hardest", "hard", "more hard"], answer: "harder", topic: "Comparatives" },
+  { sentence: "They ___ finished before noon.", options: ["had", "has", "have", "having"], answer: "had", topic: "Past Perfect" },
+  { sentence: "She wondered ___ he was late.", options: ["why", "what", "that", "if"], answer: "why", topic: "Question Formation" },
+  { sentence: "You ___ have told me earlier.", options: ["should", "can", "must", "may"], answer: "should", topic: "Modal Verbs" }
+]
+};
