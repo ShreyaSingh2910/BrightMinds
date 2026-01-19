@@ -10,7 +10,6 @@ const bgMusic = document.getElementById("bgMusic");
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
 
-/* 🎵 Start background music after first user interaction */
 function startMusicOnce() {
   if (!bgMusic) return;
 
@@ -51,11 +50,10 @@ function playWrongSound() {
   }, 500);
 }
 
-/* ---------------- FRACTIONS ---------------- */
 const fractions = [
   { numerator: 1, denominator: 2 },
   { numerator: 2, denominator: 3 },
-  { numerator: 3, denominator: 4 }, // square
+  { numerator: 3, denominator: 4 }, 
   { numerator: 2, denominator: 5 },
   { numerator: 3, denominator: 5 }
 ];
@@ -65,15 +63,12 @@ let currentFraction;
 let placed = 0;
 let activePart = null;
 
-/* ---------------- SHAPE HELPER ---------------- */
 function getShapeType(denominator) {
   return denominator === 4 ? "square" : "circle";
 }
 
-/* ---------------- INIT ---------------- */
 initRound();
 
-/* ---------------- INIT ROUND ---------------- */
 function initRound() {
   placed = 0;
   activePart = null;
@@ -97,7 +92,6 @@ function initRound() {
   buildParts(currentFraction.denominator, shape);
 }
 
-/* ---------------- DRAW WHOLE CIRCLE ---------------- */
 function drawWholeCircle(denominator) {
   const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   circle.setAttribute("cx", 100);
@@ -125,8 +119,6 @@ function drawWholeCircle(denominator) {
     wholeSVG.appendChild(line);
   }
 }
-
-/* ---------------- DRAW WHOLE SQUARE ---------------- */
 function drawWholeSquare() {
   const start = 20;
   const size = 160;
@@ -160,7 +152,6 @@ function drawWholeSquare() {
   wholeSVG.appendChild(hLine);
 }
 
-/* ---------------- BUILD PARTS ---------------- */
 function buildParts(denominator, shape) {
   partsArea.innerHTML = "";
 
@@ -182,7 +173,6 @@ function buildParts(denominator, shape) {
   }
 }
 
-/* ---------------- DROP INTO SHAPE ---------------- */
 dropZone.addEventListener("dragover", e => e.preventDefault());
 
 dropZone.addEventListener("drop", e => {
@@ -192,7 +182,6 @@ dropZone.addEventListener("drop", e => {
 
   const shape = getShapeType(currentFraction.denominator);
 
-  /* -------- CIRCLE -------- */
   if (shape === "circle") {
     const sliceAngle = 360 / currentFraction.denominator;
     const startAngle = placed * sliceAngle;
@@ -217,7 +206,6 @@ dropZone.addEventListener("drop", e => {
     filledSVG.appendChild(slice);
   }
 
-  /* -------- SQUARE -------- */
   else {
     const start = 20;
     const size = 160;
@@ -250,7 +238,6 @@ dropZone.addEventListener("drop", e => {
   placed++;
 });
 
-/* ---------------- TAP / CLICK TO REMOVE ---------------- */
 function enableTapToRemove(el) {
   el.addEventListener("click", () => {
     const index = el.dataset.index;
@@ -267,7 +254,6 @@ function enableTapToRemove(el) {
   });
 }
 
-/* ---------------- CHECK ---------------- */
 checkBtn.addEventListener("click", () => {
   if (placed === currentFraction.numerator) {
     playCorrectSound();
@@ -281,7 +267,6 @@ checkBtn.addEventListener("click", () => {
   }
 });
 
-/* ---------------- NEXT ROUND ---------------- */
 function nextRound() {
   currentIndex++;
 
@@ -297,7 +282,6 @@ const successOverlay = document.getElementById("successOverlay");
 const replayBtn = document.getElementById("replayBtn");
 const backBtn = document.getElementById("backBtn");
 
-/* 🎉 SHOW SUCCESS */
 function showSuccessScreen() {
   successOverlay.classList.add("show");
 
@@ -306,21 +290,19 @@ function showSuccessScreen() {
     renderer: "svg",
     loop: true,
     autoplay: true,
-    // 🎉 Kid-friendly celebration animation
     path: "lottie/celebration2.json"
   });
 }
 
-/* 🔁 REPLAY */
 replayBtn.addEventListener("click", () => {
   window.location.reload();
 });
 
-/* ⬅ BACK */
 backBtn.addEventListener("click", () => {
   window.history.back();
 });
 function goBack() {
   window.location.href="fraction.html";
 }
+
 
