@@ -193,7 +193,7 @@ svg path {
 
 @media (max-width: 480px) {
  .game-card {
-    width: 100vw;       
+    width: 80vw;       
     max-width: 450px;  
     padding: 20px;    
   }
@@ -312,3 +312,4 @@ svg path {
   background: linear-gradient(135deg, #ff9800, #ff5722);
 
 }
+
