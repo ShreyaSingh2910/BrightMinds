@@ -6,68 +6,55 @@ const checkBtn = document.getElementById("checkBtn");
 const resultMsg = document.getElementById("resultMsg");
 const instruction = document.querySelector(".instruction");
 
+const successOverlay = document.getElementById("successOverlay");
+const replayBtn = document.getElementById("replayBtn");
+const backBtn = document.getElementById("backBtn");
+
 const bgMusic = document.getElementById("bgMusic");
 const correctSound = document.getElementById("correctSound");
 const wrongSound = document.getElementById("wrongSound");
 
 function startMusicOnce() {
   if (!bgMusic) return;
-
   bgMusic.volume = 0.35;
   bgMusic.play().catch(() => {});
-
   document.removeEventListener("click", startMusicOnce);
   document.removeEventListener("touchstart", startMusicOnce);
 }
-
 document.addEventListener("click", startMusicOnce);
 document.addEventListener("touchstart", startMusicOnce);
+
 function playCorrectSound() {
   if (!correctSound) return;
-
-  if (bgMusic) bgMusic.volume = 0.15;
-
-  correctSound.pause();
+  bgMusic && (bgMusic.volume = 0.15);
   correctSound.currentTime = 0;
   correctSound.play();
-
-  setTimeout(() => {
-    if (bgMusic) bgMusic.volume = 0.35;
-  }, 700);
+  setTimeout(() => bgMusic && (bgMusic.volume = 0.35), 700);
 }
 
 function playWrongSound() {
   if (!wrongSound) return;
-
-  if (bgMusic) bgMusic.volume = 0.15;
-
-  wrongSound.pause();
+  bgMusic && (bgMusic.volume = 0.15);
   wrongSound.currentTime = 0;
   wrongSound.play();
-
-  setTimeout(() => {
-    if (bgMusic) bgMusic.volume = 0.35;
-  }, 500);
+  setTimeout(() => bgMusic && (bgMusic.volume = 0.35), 500);
 }
 
 const ALL_FRACTIONS = [
-  
   { numerator: 1, denominator: 2 },
   { numerator: 2, denominator: 3 },
-  { numerator: 3, denominator: 5 },
-  { numerator: 1, denominator: 3 },
-  { numerator: 2, denominator: 5 },
   { numerator: 3, denominator: 4 },
+  { numerator: 1, denominator: 3 },
+  { numerator: 2, denominator: 4 },
+  { numerator: 3, denominator: 5 },
+  { numerator: 2, denominator: 5 },
   { numerator: 4, denominator: 5 },
   { numerator: 1, denominator: 4 },
-  { numerator: 2, denominator: 4 },
   { numerator: 3, denominator: 4 }
- 
 ];
 
 function getRandomFractions(pool, count) {
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  return [...pool].sort(() => Math.random() - 0.5).slice(0, count);
 }
 
 const fractions = getRandomFractions(ALL_FRACTIONS, 5);
@@ -76,9 +63,10 @@ let currentIndex = 0;
 let currentFraction;
 let placed = 0;
 let activePart = null;
+let occupiedSlots = new Set();
 
-function getShapeType(denominator) {
-  return denominator === 4 ? "square" : "circle";
+function getShapeType(den) {
+  return den === 4 ? "square" : "circle";
 }
 
 initRound();
@@ -86,186 +74,156 @@ initRound();
 function initRound() {
   placed = 0;
   activePart = null;
+  occupiedSlots.clear();
   filledSVG.innerHTML = "";
   wholeSVG.innerHTML = "";
   resultMsg.textContent = "";
 
   currentFraction = fractions[currentIndex];
-
   instruction.innerHTML =
     `Build the fraction: <b>${currentFraction.numerator} / ${currentFraction.denominator}</b>`;
 
   const shape = getShapeType(currentFraction.denominator);
-
-  if (shape === "circle") {
-    drawWholeCircle(currentFraction.denominator);
-  } else {
-    drawWholeSquare();
-  }
+  shape === "circle"
+    ? drawWholeCircle(currentFraction.denominator)
+    : drawWholeSquare();
 
   buildParts(currentFraction.denominator, shape);
 }
 
-function drawWholeCircle(denominator) {
-  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  circle.setAttribute("cx", 100);
-  circle.setAttribute("cy", 100);
-  circle.setAttribute("r", 98);
-  circle.setAttribute("fill", "#f6f2ff");
-  circle.setAttribute("stroke", "#777");
-  circle.setAttribute("stroke-width", "2");
-  wholeSVG.appendChild(circle);
+function drawWholeCircle(den) {
+  wholeSVG.appendChild(svg("circle", {
+    cx: 100, cy: 100, r: 98,
+    fill: "#f6f2ff", stroke: "#777", "stroke-width": 2
+  }));
 
-  for (let i = 0; i < denominator; i++) {
-    const angle = (360 / denominator) * i;
-    const rad = (angle * Math.PI) / 180;
-
-    const x = 100 + 100 * Math.cos(rad);
-    const y = 100 + 100 * Math.sin(rad);
-
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", 100);
-    line.setAttribute("y1", 100);
-    line.setAttribute("x2", x);
-    line.setAttribute("y2", y);
-    line.setAttribute("stroke", "#777");
-
-    wholeSVG.appendChild(line);
+  for (let i = 0; i < den; i++) {
+    const a = (360 / den) * i * Math.PI / 180;
+    wholeSVG.appendChild(svg("line", {
+      x1: 100, y1: 100,
+      x2: 100 + 100 * Math.cos(a),
+      y2: 100 + 100 * Math.sin(a),
+      stroke: "#777"
+    }));
   }
 }
 
 function drawWholeSquare() {
-  const start = 20;
-  const size = 160;
-  const half = size / 2;
+  const start = 20, size = 160, half = size / 2;
 
-  const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  rect.setAttribute("x", start);
-  rect.setAttribute("y", start);
-  rect.setAttribute("width", size);
-  rect.setAttribute("height", size);
-  rect.setAttribute("fill", "#f6f2ff");
-  rect.setAttribute("stroke", "#777");
-  rect.setAttribute("stroke-width", "2");
-  wholeSVG.appendChild(rect);
+  wholeSVG.appendChild(svg("rect", {
+    x: start, y: start, width: size, height: size,
+    fill: "#f6f2ff", stroke: "#777", "stroke-width": 2
+  }));
 
-  const vLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  vLine.setAttribute("x1", start + half);
-  vLine.setAttribute("y1", start);
-  vLine.setAttribute("x2", start + half);
-  vLine.setAttribute("y2", start + size);
-  vLine.setAttribute("stroke", "#777");
+  wholeSVG.appendChild(svg("line", {
+    x1: start + half, y1: start,
+    x2: start + half, y2: start + size,
+    stroke: "#777"
+  }));
 
-  const hLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  hLine.setAttribute("x1", start);
-  hLine.setAttribute("y1", start + half);
-  hLine.setAttribute("x2", start + size);
-  hLine.setAttribute("y2", start + half);
-  hLine.setAttribute("stroke", "#777");
-
-  wholeSVG.appendChild(vLine);
-  wholeSVG.appendChild(hLine);
+  wholeSVG.appendChild(svg("line", {
+    x1: start, y1: start + half,
+    x2: start + size, y2: start + half,
+    stroke: "#777"
+  }));
 }
 
-function buildParts(denominator, shape) {
+function buildParts(count, shape) {
   partsArea.innerHTML = "";
-
-  for (let i = 0; i < denominator; i++) {
-    const part = document.createElement("div");
-    part.className = "part-item";
-    part.setAttribute("draggable", "true");
-    part.dataset.index = i;
-
-    if (shape === "square") {
-      part.classList.add("square-part");
-    }
-
-    part.addEventListener("dragstart", () => {
-      activePart = part;
-    });
-
-    partsArea.appendChild(part);
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.className = "part-item";
+    if (shape === "square") p.classList.add("square-part");
+    p.draggable = true;
+    p.dataset.index = i;
+    p.addEventListener("dragstart", () => activePart = p);
+    partsArea.appendChild(p);
   }
 }
 
 dropZone.addEventListener("dragover", e => e.preventDefault());
-
 dropZone.addEventListener("drop", e => {
   e.preventDefault();
   if (!activePart || activePart.classList.contains("used")) return;
-  if (placed >= currentFraction.denominator) return;
 
-  const shape = getShapeType(currentFraction.denominator);
+  const rect = dropZone.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
-  if (shape === "circle") {
-    const sliceAngle = 360 / currentFraction.denominator;
-    const startAngle = placed * sliceAngle;
-    const endAngle = startAngle + sliceAngle;
+  getShapeType(currentFraction.denominator) === "circle"
+    ? placeCircleSlice(x, y)
+    : placeSquarePart(x, y);
+});
 
-    const x1 = 100 + 100 * Math.cos(startAngle * Math.PI / 180);
-    const y1 = 100 + 100 * Math.sin(startAngle * Math.PI / 180);
-    const x2 = 100 + 100 * Math.cos(endAngle * Math.PI / 180);
-    const y2 = 100 + 100 * Math.sin(endAngle * Math.PI / 180);
+function placeCircleSlice(x, y) {
+  const cx = 110, cy = 110;
+  const dx = x - cx, dy = y - cy;
+  if (Math.hypot(dx, dy) > 100) return;
 
-    const slice = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    slice.setAttribute(
-      "d",
-      `M100 100 L${x1} ${y1} A100 100 0 0 1 ${x2} ${y2} Z`
-    );
-    slice.setAttribute("fill", "#7c4dff");
-    slice.style.cursor = "pointer";
-    slice.style.pointerEvents = "all";
-    slice.dataset.index = activePart.dataset.index;
+  let angle = Math.atan2(dy, dx) * 180 / Math.PI;
+  if (angle < 0) angle += 360;
 
-    enableTapToRemove(slice);
-    filledSVG.appendChild(slice);
-  }
+  const d = currentFraction.denominator;
+  const sliceAngle = 360 / d;
+  const index = Math.floor(angle / sliceAngle);
+  if (occupiedSlots.has(index)) return;
 
-  else {
-    const start = 20;
-    const size = 160;
-    const half = size / 2;
+  const a1 = index * sliceAngle * Math.PI / 180;
+  const a2 = (index + 1) * sliceAngle * Math.PI / 180;
 
-    const positions = [
-      { x: start, y: start },
-      { x: start + half, y: start },
-      { x: start, y: start + half },
-      { x: start + half, y: start + half }
-    ];
+  const slice = svg("path", {
+    d: `M100 100
+        L${100 + 100*Math.cos(a1)} ${100 + 100*Math.sin(a1)}
+        A100 100 0 0 1 ${100 + 100*Math.cos(a2)} ${100 + 100*Math.sin(a2)}
+        Z`,
+    fill: "#7c4dff"
+  });
 
-    const pos = positions[placed];
+  slice.dataset.index = index;
+  enableTapToRemove(slice);
+  filledSVG.appendChild(slice);
 
-    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    rect.setAttribute("x", pos.x);
-    rect.setAttribute("y", pos.y);
-    rect.setAttribute("width", half);
-    rect.setAttribute("height", half);
-    rect.setAttribute("fill", "#7c4dff");
-    rect.style.cursor = "pointer";
-    rect.style.pointerEvents = "all";
-    rect.dataset.index = activePart.dataset.index;
-
-    enableTapToRemove(rect);
-    filledSVG.appendChild(rect);
-  }
-
+  occupiedSlots.add(index);
   activePart.classList.add("used");
   placed++;
-});
+}
+
+function placeSquarePart(x, y) {
+  const start = 20, size = 160, half = size / 2;
+  if (x < start || y < start || x > start + size || y > start + size) return;
+
+  const col = Math.floor((x - start) / half);
+  const row = Math.floor((y - start) / half);
+  const index = row * 2 + col;
+  if (occupiedSlots.has(index)) return;
+
+  const rect = svg("rect", {
+    x: start + col * half,
+    y: start + row * half,
+    width: half,
+    height: half,
+    fill: "#7c4dff"
+  });
+
+  rect.dataset.index = index;
+  enableTapToRemove(rect);
+  filledSVG.appendChild(rect);
+
+  occupiedSlots.add(index);
+  activePart.classList.add("used");
+  placed++;
+}
 
 function enableTapToRemove(el) {
   el.addEventListener("click", () => {
-    const index = el.dataset.index;
-
-    if (!filledSVG.contains(el)) return;
-
+    const index = Number(el.dataset.index);
     filledSVG.removeChild(el);
+    occupiedSlots.delete(index);
     placed--;
 
-    const trayPart = document.querySelector(
-      `.part-item[data-index="${index}"]`
-    );
-    if (trayPart) trayPart.classList.remove("used");
+    const used = document.querySelector(".part-item.used");
+    used && used.classList.remove("used");
   });
 }
 
@@ -276,7 +234,7 @@ checkBtn.addEventListener("click", () => {
     resultMsg.style.color = "green";
     setTimeout(nextRound, 1200);
   } else {
-     playWrongSound();
+    playWrongSound();
     resultMsg.textContent = "Tap a piece to remove 😊";
     resultMsg.style.color = "orange";
   }
@@ -284,18 +242,12 @@ checkBtn.addEventListener("click", () => {
 
 function nextRound() {
   currentIndex++;
-
   if (currentIndex >= fractions.length) {
     showSuccessScreen();
     return;
   }
-
   initRound();
 }
-
-const successOverlay = document.getElementById("successOverlay");
-const replayBtn = document.getElementById("replayBtn");
-const backBtn = document.getElementById("backBtn");
 
 function showSuccessScreen() {
   successOverlay.classList.add("show");
@@ -309,14 +261,11 @@ function showSuccessScreen() {
   });
 }
 
-replayBtn.addEventListener("click", () => {
-  window.location.reload();
-});
+replayBtn.addEventListener("click", () => window.location.reload());
+backBtn.addEventListener("click", () => window.history.back());
 
-backBtn.addEventListener("click", () => {
-  window.history.back();
-});
-function goBack() {
-  window.location.href="fraction.html";
+function svg(tag, attrs) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (let k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
 }
-
