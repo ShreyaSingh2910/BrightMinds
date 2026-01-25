@@ -1,6 +1,3 @@
-/*********************************
- 🔥 FIREBASE CONFIG
-**********************************/
 const firebaseConfig = {
   apiKey: "AIzaSyBmz23pK8TQ8iE5_EjRbOo0qCazLOBmcBw",
   authDomain: "brightminds-52de2.firebaseapp.com",
@@ -15,10 +12,6 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-
-/*********************************
- 🔁 AUTO REDIRECT (SINGLE SOURCE OF TRUTH)
-**********************************/
 auth.onAuthStateChanged(user => {
   const loginMode = localStorage.getItem("loginMode");
   const avatarCreated = localStorage.getItem("avatarCreated");
@@ -34,10 +27,6 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-
-/*********************************
- 🧭 TAB SWITCHING
-**********************************/
 const loginTab = document.getElementById("loginTab");
 const guestTab = document.getElementById("guestTab");
 const loginSection = document.getElementById("loginSection");
@@ -57,10 +46,6 @@ guestTab.onclick = () => {
   guestSection.classList.remove("hidden");
 };
 
-
-/*********************************
- 🔐 GOOGLE LOGIN
-**********************************/
 document.getElementById("googleBtn").onclick = async () => {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -69,18 +54,11 @@ document.getElementById("googleBtn").onclick = async () => {
     localStorage.setItem("loginMode", "google");
     localStorage.setItem("userEmail", result.user.email);
 
-    // ❌ NO redirect here
-    // onAuthStateChanged will handle it
-
   } catch (err) {
     alert(err.message);
   }
 };
 
-
-/*********************************
- ✉️ EMAIL / PASSWORD LOGIN
-**********************************/
 document.getElementById("manualLoginBtn").onclick = async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -100,11 +78,8 @@ document.getElementById("manualLoginBtn").onclick = async () => {
   localStorage.setItem("userEmail", email);
 };
 
-
-/*********************************
- 👤 GUEST MODE
-**********************************/
 document.getElementById("startGuest").onclick = () => {
   localStorage.setItem("loginMode", "guest");
   window.location.href = "mainpage/index.html";
 };
+
