@@ -17,19 +17,18 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
 
 /*********************************
- 🔁 AUTO REDIRECT ON PAGE LOAD
+ 🔁 AUTO REDIRECT (SINGLE SOURCE OF TRUTH)
 **********************************/
 auth.onAuthStateChanged(user => {
   const loginMode = localStorage.getItem("loginMode");
   const avatarCreated = localStorage.getItem("avatarCreated");
 
-  // Logged in user (not guest)
   if (user && loginMode !== "guest") {
     if (!avatarCreated) {
-      // First time → avatar page
+      // 👶 First time login
       window.location.href = "mainpage/Dashboard/avtar.html";
     } else {
-      // Normal flow → home
+      // 🧒 Returning user
       window.location.href = "mainpage/index.html";
     }
   }
@@ -41,7 +40,6 @@ auth.onAuthStateChanged(user => {
 **********************************/
 const loginTab = document.getElementById("loginTab");
 const guestTab = document.getElementById("guestTab");
-
 const loginSection = document.getElementById("loginSection");
 const guestSection = document.getElementById("guestSection");
 
@@ -63,9 +61,7 @@ guestTab.onclick = () => {
 /*********************************
  🔐 GOOGLE LOGIN
 **********************************/
-const googleBtn = document.getElementById("googleBtn");
-
-googleBtn.onclick = async () => {
+document.getElementById("googleBtn").onclick = async () => {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const result = await auth.signInWithPopup(provider);
@@ -73,13 +69,8 @@ googleBtn.onclick = async () => {
     localStorage.setItem("loginMode", "google");
     localStorage.setItem("userEmail", result.user.email);
 
-    const avatarCreated = localStorage.getItem("avatarCreated");
-
-    if (!avatarCreated) {
-      window.location.href = "mainpage/Dashboard/avtar.html";
-    } else {
-      window.location.href = "mainpage/index.html";
-    }
+    // ❌ NO redirect here
+    // onAuthStateChanged will handle it
 
   } catch (err) {
     alert(err.message);
@@ -90,9 +81,7 @@ googleBtn.onclick = async () => {
 /*********************************
  ✉️ EMAIL / PASSWORD LOGIN
 **********************************/
-const manualLoginBtn = document.getElementById("manualLoginBtn");
-
-manualLoginBtn.onclick = async () => {
+document.getElementById("manualLoginBtn").onclick = async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
@@ -109,18 +98,13 @@ manualLoginBtn.onclick = async () => {
 
   localStorage.setItem("loginMode", "manual");
   localStorage.setItem("userEmail", email);
-
-  // Manual users always go to avatar first
-  window.location.href = "mainpage/Dashboard/avtar.html";
 };
 
 
 /*********************************
  👤 GUEST MODE
 **********************************/
-const startGuestBtn = document.getElementById("startGuest");
-
-startGuestBtn.onclick = () => {
+document.getElementById("startGuest").onclick = () => {
   localStorage.setItem("loginMode", "guest");
   window.location.href = "mainpage/index.html";
 };
