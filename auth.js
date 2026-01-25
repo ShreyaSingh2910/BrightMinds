@@ -15,13 +15,16 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
 auth.onAuthStateChanged(user => {
   const isGuest = localStorage.getItem("loginMode") === "guest";
+  const avatarCreated = localStorage.getItem("avatarCreated");
 
   if (user && !isGuest) {
-    // user already logged in → skip login page
-    window.location.href = "mainpage/index.html";
+    if (!avatarCreated) {
+      window.location.href = "Dashboard/avtar.html";
+    } else {
+      window.location.href = "mainpage/index.html";
+    }
   }
 });
-
 
 const loginTab = document.getElementById("loginTab");
 const guestTab = document.getElementById("guestTab");
@@ -55,11 +58,22 @@ googleBtn.onclick = async () => {
     localStorage.setItem("loginMode", "google");
     localStorage.setItem("userEmail", result.user.email);
 
-    window.location.href = "mainpage/index.html";
+    // 🔑 check if avatar already created
+    const avatarCreated = localStorage.getItem("avatarCreated");
+
+    if (!avatarCreated) {
+      // first time → avatar page
+      window.location.href = "Dashboard/avtar.html";
+    } else {
+      // normal flow
+      window.location.href = "mainpage/index.html";
+    }
+
   } catch (err) {
     alert(err.message);
   }
 };
+
 
 manualLoginBtn.onclick = async () => {
   const email = document.getElementById("email").value.trim();
@@ -79,12 +93,13 @@ manualLoginBtn.onclick = async () => {
   localStorage.setItem("loginMode", "manual");
   localStorage.setItem("userEmail", email);
 
-  window.location.href = "mainpage/index.html";
+  window.location.href = "Dashboard/avtar.html";
 };
 
 startGuestBtn.onclick = () => {
   localStorage.setItem("loginMode", "guest");
-  window.location.href = "Dashboard/avtar.html";
+  window.location.href = "mainpage/index.html";
 };
+
 
 
