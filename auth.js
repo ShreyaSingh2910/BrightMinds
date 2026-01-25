@@ -63,7 +63,7 @@ googleBtn.onclick = async () => {
 
     if (!avatarCreated) {
       // first time → avatar page
-      window.location.href = "Dashboard/avtar.html";
+      window.location.href = "mainpage/Dashboard/avtar.html";
     } else {
       // normal flow
       window.location.href = "mainpage/index.html";
@@ -93,13 +93,14 @@ manualLoginBtn.onclick = async () => {
   localStorage.setItem("loginMode", "manual");
   localStorage.setItem("userEmail", email);
 
-  window.location.href = "Dashboard/avtar.html";
+  window.location.href = "mainpage/Dashboard/avtar.html";
 };
 
 startGuestBtn.onclick = () => {
   localStorage.setItem("loginMode", "guest");
   window.location.href = "mainpage/index.html";
 };
+
 
 
 
