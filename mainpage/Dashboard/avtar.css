@@ -1,0 +1,256 @@
+
+:root {
+  --bg-1: #8d98ff;
+  --bg-2: #ec99db;
+  --card-bg: #ffffff;
+  --inner-bg-1: #fff1f2;
+  --inner-bg-2: #f8b2a0;
+}
+/* ================= RESET ================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+   background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Comic Sans MS", "Poppins", cursive;
+}
+
+/* ================= MAIN CARD (INCREASED SIZE) ================= */
+.profile-card {
+  width: 540px;          /* ⬅ increased */
+  max-width: 96vw;
+  padding: 26px;
+  border-radius: 40px;
+  background: var(--card-bg);
+  box-shadow:
+    0 40px 70px rgba(0,0,0,0.18);
+}
+
+/* ================= INNER PANEL ================= */
+.profile-inner {
+   background: linear-gradient(180deg, var(--inner-bg-1), var(--inner-bg-2));
+  border-radius: 30px;
+  padding: 34px 28px 36px;
+  text-align: center;
+    padding-left: 36px;
+  padding-right: 36px;
+}
+
+/* ================= TITLE ================= */
+.profile-inner h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #fb7185;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #7c2d12;
+  margin: 8px 0 26px;
+}
+
+/* ================= NAME SECTION ================= */
+.name-section {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 22px;
+  margin-bottom: 28px;
+  box-shadow: 0 16px 28px rgba(0,0,0,0.15);
+}
+
+.name-section label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0ea5e9;
+  margin-bottom: 10px;
+}
+
+.name-section input {
+  width: 100%;
+  height: 56px;       /* ⬅ bigger input */
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #f0f9ff;
+}
+
+.name-section input::placeholder {
+  color: #38bdf8;
+}
+
+/* ================= AVATARS ================= */
+.choose-text {
+  font-weight: 800;
+  font-size: 17px;
+  color: #fb7185;
+  margin: 18px 0 16px;
+}
+.avatar-grid {
+  display: flex;
+  justify-content: space-between; /* spread evenly */
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 34px;
+  padding: 0 10px;
+  flex-wrap: nowrap; /* 🚫 NO wrapping */
+}
+
+.avatar-grid img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: white;
+  padding: 10px;
+  cursor: pointer;
+  flex-shrink: 0; /* 🚫 prevents shrinking */
+}
+
+.avatar-grid img:hover {
+  transform: translateY(-6px) scale(1.15);
+}
+
+.avatar-grid img.selected {
+  background: #a7f3d0;
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 5px white,
+    0 0 26px #34d399;
+}
+
+/* ================= BUTTON ================= */
+button {
+  width: 100%;
+  height: 60px;      /* ⬅ bigger button */
+  border-radius: 26px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #fb7185,
+    #fbbf24
+  );
+  box-shadow: 0 18px 32px rgba(0,0,0,0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .profile-card {
+    width: 94vw;
+    padding: 20px;
+  }
+
+  .avatar-grid {
+    gap: 14px;
+  }
+
+  .avatar-grid img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ================= FLOATING BACKGROUND ================= */
+.floating-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1; /* stays behind everything */
+}
+
+.floating-bg span {
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  animation: floatUp 18s linear infinite;
+  bottom: -150px;
+}
+
+/* different sizes & positions */
+.floating-bg span:nth-child(1) {
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  animation-duration: 14s;
+}
+
+.floating-bg span:nth-child(2) {
+  left: 25%;
+  width: 140px;
+  height: 140px;
+  animation-duration: 22s;
+  animation-delay: 2s;
+}
+
+.floating-bg span:nth-child(3) {
+  left: 45%;
+  width: 100px;
+  height: 100px;
+  animation-duration: 18s;
+  animation-delay: 4s;
+}
+
+.floating-bg span:nth-child(4) {
+  left: 65%;
+  width: 160px;
+  height: 160px;
+  animation-duration: 26s;
+  animation-delay: 1s;
+}
+
+.floating-bg span:nth-child(5) {
+  left: 80%;
+  width: 90px;
+  height: 90px;
+  animation-duration: 20s;
+  animation-delay: 3s;
+}
+
+.floating-bg span:nth-child(6) {
+  left: 55%;
+  width: 60px;
+  height: 60px;
+  animation-duration: 16s;
+  animation-delay: 6s;
+}
+
+/* animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.2);
+    opacity: 0;
+  }
+}
