@@ -9,23 +9,20 @@
 
 <div class="dashboard">
 
-  <!-- SIDE PANEL -->
   <aside class="side-panel">
     <div class="logo" onclick="goBack()">←</div>
 
-    <div class="menu active" onclick="loadGame('physics')">Sci</div>
-    <div class="menu" onclick="loadGame('math')">Math</div>
-    <div class="menu" onclick="loadGame('english')">Eng</div>
-    <div class="menu" onclick="loadGame('social')">SS</div>
-    <div class="menu" onclick="loadGame('memory')">ME</div>
+    <div class="menu active" onclick="loadGame('physics', event)">Sci</div>
+    <div class="menu" onclick="loadGame('math', event)">Math</div>
+    <div class="menu" onclick="loadGame('english', event)">Eng</div>
+    <div class="menu" onclick="loadGame('social', event)">SS</div>
+    <div class="menu" onclick="loadGame('memory', event)">ME</div>
 
     <div class="side-bottom">⟳</div>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- HELLO CARD -->
     <section class="hello-card">
       <div>
         <h2>Hello, <span id="username">Jerry</span> 👋</h2>
@@ -34,7 +31,6 @@
       <div class="hello-img">📊</div>
     </section>
 
-    <!-- GREEN SCORE PANEL -->
     <section class="score-panel">
       <div class="score-left">
         <h2>Congratulations!</h2>
@@ -47,7 +43,6 @@
       </div>
     </section>
 
-    <!-- GAME PROFILE CARD -->
     <section class="game-profile">
       <h3 id="gameTitle">Physics Profile</h3>
 
@@ -69,56 +64,42 @@
       </div>
     </section>
 
-    <!-- RECENT GAMES -->
-    <section class="recent">
-      <h3>Recently Played</h3>
-      <ul id="recentGames">
-        <li>Laws of Motion</li>
-        <li>Force Quiz</li>
-      </ul>
-    </section>
-
   </main>
 
-  <!-- PROFILE SUMMARY -->
-  <!-- PROFILE SUMMARY -->
-<aside class="profile">
+  <aside class="profile">
 
-  <img src="https://i.pravatar.cc/150?img=12" class="avatar">
+    <img src="https://i.pravatar.cc/150?img=12" class="avatar">
+    <h3 class="profile-name">Jerry Diaz</h3>
 
-  <h3 class="profile-name">Jerry Diaz</h3>
+    <div class="profile-cards">
 
-  <div class="profile-cards">
+      <div class="profile-card-item">
+        <div class="icon">⭐</div>
+        <div class="text">
+          <span>Avg Score</span>
+          <b>82</b>
+        </div>
+      </div>
+
+      <div class="profile-card-item">
+        <div class="icon">📅</div>
+        <div class="text">
+          <span>Joined</span>
+          <b>12 Jan 2024</b>
+        </div>
+      </div>
 
     <div class="profile-card-item">
-      <div class="icon">⭐</div>
-      <div class="text">
-        <span>Avg Score</span>
-        <b>82</b>
-      </div>
-    </div>
-
-    <div class="profile-card-item">
-      <div class="icon">📅</div>
-      <div class="text">
-        <span>Joined</span>
-        <b>12 Jan 2024</b>
-      </div>
-    </div>
-
-    <div class="profile-card-item">
-      <div class="icon">🕒</div>
-      <div class="text">
-        <span>Last Login</span>
-        <b class="success">Today</b>
-      </div>
-    </div>
-
+  <div class="icon">🎮</div>
+  <div class="text" class="new">
+    <span>Recently Played</span>
+    <b>English</b>
   </div>
+</div>
 
-</aside>
+    </div>
 
- 
+  </aside>
 
 </div>
 
