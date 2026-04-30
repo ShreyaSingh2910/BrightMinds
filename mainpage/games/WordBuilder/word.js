@@ -8,6 +8,13 @@ let gameIndex = 0;
 let skillLevel = 1;
 let currentQuestion = null;
 let score = 10; 
+let correctStreak = 0;
+let wrongStreak = 0;
+let usedQuestions = {
+  easy: [],
+  medium: [],
+  hard: []
+};
 
 const sentenceEl = document.getElementById("sentence");
 const optionsEl = document.getElementById("options");
@@ -50,14 +57,23 @@ function saveGameScore(gameName, score) {
 }
 
 function getQuestion() {
-  const pool =
-    skillLevel === 1
-      ? questionBank.easy
-      : skillLevel === 2
-      ? questionBank.medium
-      : questionBank.hard;
+  const level =
+    skillLevel === 1 ? "easy" :
+    skillLevel === 2 ? "medium" : "hard";
 
-  return pool[Math.floor(Math.random() * pool.length)];
+  const pool = questionBank[level];
+
+  const unused = pool.filter(q => !usedQuestions[level].includes(q));
+  if (unused.length === 0) {
+    usedQuestions[level] = [];
+    return getQuestion();
+  }
+
+  const question = unused[Math.floor(Math.random() * unused.length)];
+
+  usedQuestions[level].push(question);
+
+  return question;
 }
 
 function loadQuestion() {
@@ -86,9 +102,32 @@ function loadQuestion() {
 
   updateScoreDisplay();
   updateProgress();
+  updateSkillUI();
 
 }
+window.restartGame = function () {
+  popup.style.display = "none";
+  progressFill.style.width = "0%";
+  gameIndex = 0;
+  skillLevel = 1;
+  score = 10;
 
+  correctStreak = 0;
+  wrongStreak = 0;
+
+  usedQuestions = {
+    easy: [],
+    medium: [],
+    hard: []
+  };
+
+  updateScoreDisplay();
+  updateSkillUI();
+
+  bgSound.currentTime = 0;
+  bgSound.play().catch(() => {});
+  loadQuestion();
+};
 function updateProgress() {
   progressFill.style.width =
     `${(gameIndex / TOTAL_QUESTIONS) * 100}%`;
@@ -103,21 +142,44 @@ function handleAnswer(selected, btn) {
     correctSound.currentTime = 0;
     correctSound.play();
     btn.classList.add("correct");
+
+    correctStreak++;
+    wrongStreak = 0;
+
+    if (correctStreak === 3) {
+      if (skillLevel < 3) skillLevel++;
+      correctStreak = 0;
+    }
+
   } else {
     wrongSound.currentTime = 0;
     wrongSound.play();
     btn.classList.add("wrong");
 
-    score--; 
+    score--;
     if (score < 0) score = 0;
 
     updateScoreDisplay();
+
+    wrongStreak++;
+    correctStreak = 0;
+
+    if (wrongStreak === 2) {
+      if (skillLevel > 1) skillLevel--;
+      wrongStreak = 0;
+    }
   }
+  updateSkillUI(); 
 
   setTimeout(() => {
     gameIndex++;
     loadQuestion();
   }, 700);
+}
+
+function updateSkillUI() {
+  const levels = ["Easy", "Medium", "Hard"];
+  skillText.innerText = levels[skillLevel - 1];
 }
 
 function updateScoreDisplay() {
@@ -161,17 +223,6 @@ function getTip(topic) {
   return tips[topic] || "Choose carefully.";
 }
 
-window.restartGame = function () {
-  popup.style.display = "none";
-  progressFill.style.width = "0%";
-  gameIndex = 0;
-  skillLevel = 1;
-  score = 10;
-  updateScoreDisplay();
-  bgSound.currentTime = 0;
-  bgSound.play().catch(() => {});
-  loadQuestion();
-};
 
 window.goBack = function () {
   window.location.href = "index.html";
