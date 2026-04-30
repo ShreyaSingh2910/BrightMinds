@@ -25,33 +25,27 @@ function waitForEmail(timeout = 5000) {
 }
 
 async function saveGameScore(gameName, score) {
-  try {
-    const email = await waitForEmail();
+  const email = localStorage.getItem("userEmail");
+  if (!email) {
+    console.error("❌ No email found");
+    return;
+  }
 
-    const data = JSON.stringify({
-      email,
-      gameName,
-      score
+  try {
+    const response = await fetch(`${BASE_URL}/api/game/saveScore`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        gameName,
+        score
+      })
     });
 
-    const blob = new Blob([data], { type: "application/json" });
-
-    const success = navigator.sendBeacon(
-      `${BASE_URL}/api/game/saveScore`,
-      blob
-    );
-
-    if (success) {
-      console.log("✅ Score sent via beacon");
-    } else {
-      console.warn("⚠️ Beacon failed, fallback to fetch");
-
-      await fetch(`${BASE_URL}/api/game/saveScore`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: data
-      });
-    }
+    const result = await response.json();
+    console.log("✅ Score saved:", result);
 
   } catch (err) {
     console.error("❌ Failed to save score:", err);
